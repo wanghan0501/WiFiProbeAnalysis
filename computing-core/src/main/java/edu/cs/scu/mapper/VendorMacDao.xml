@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.cs.scu.dao.VendorMacDao">
+    <resultMap id="VendorMacResultMap" type="vendorMacBean">
+        <result column="mac_prefix" property="macPrefix" jdbcType="VARCHAR"/>
+        <result column="vendor_name" property="vendorName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <parameterMap id="VendorMacParameterMap" type="vendorMacBean">
+        <parameter property="macPrefix" jdbcType="INTEGER" resultMap="VendorMacResultMap"/>
+        <parameter property="vendorName" jdbcType="VARCHAR" resultMap="VendorMacResultMap"/>
+   </parameterMap>
+
+    <insert id="addVendorMac" parameterMap="VendorMacParameterMap">
+        INSERT INTO vendor_macs (mac_prefix,vendor_name)
+        VALUES (#{macPrefix},#{vendorName})
+    </insert>
+
+    <insert id="addVendorMacBatch" parameterType="java.util.List">
+        <foreach  collection="list" item="vendor" separator=";">
+            INSERT INTO vendor_macs(mac_prefix,vendor_name) VALUES(#{vendor.macPrefix}, #{vendor.vendor_name})
+        </foreach>
+    </insert>
+
+    <select id="getVendorByMac" resultMap="VendorMacResultMap">
+        SELECT * FROM vendor_macs
+        WHERE mac_prefix=#{0}
+    </select>
+</mapper>

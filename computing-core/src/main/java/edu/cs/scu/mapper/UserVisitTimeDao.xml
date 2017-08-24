@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.cs.scu.dao.UserVisitTimeDao">
+
+    <resultMap id="UserVisitTimeResultMap" type="userVisitTimeBean">
+        <result column="auto_id" property="autoId"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="mac" property="mac"/>
+        <result column="visit_time" property="visitTime"/>
+    </resultMap>
+
+    <parameterMap id="UserVisitTimeParameterMap" type="userVisitTimeBean">
+        <parameter property="autoId" jdbcType="INTEGER" resultMap="UserVisitTimeResultMap"/>
+        <parameter property="shopId" jdbcType="INTEGER" resultMap="UserVisitTimeResultMap"/>
+        <parameter property="mac" jdbcType="VARCHAR" resultMap="UserVisitTimeResultMap"/>
+        <parameter property="visitTime" jdbcType="CHAR" resultMap="UserVisitTimeResultMap"/>
+    </parameterMap>
+
+
+    <insert id="addUserVisitTime" parameterMap="UserVisitTimeParameterMap">
+        INSERT INTO user_visit_time
+        (shop_id,mac,visit_time)
+        VALUES
+        (#{shopId},#{mac},#{visitTime})
+    </insert>
+
+    <insert id="addUserVisitTimeByBatch" parameterType="list">
+        INSERT INTO user_visit_time
+        (shop_id,mac,visit_time)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.shopId},#{item.mac},#{item.visitTime})
+        </foreach>
+    </insert>
+
+    <select id="getFirstVisitTIme" resultType="java.lang.String">
+        SELECT visit_time
+        FROM user_visit_time
+        WHERE shop_id=#{0} AND mac=#{1}
+        ORDER BY visit_time ASC
+        LIMIT 1
+    </select>
+
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.cs.scu.dao.TaskDao">
+    <resultMap id="TaskResultMap" type="taskBean">
+        <result column="task_id" property="taskId"/>
+        <result column="task_name" property="taskName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="start_time" property="startTime"/>
+        <result column="finish_time" property="finishTime"/>
+        <result column="task_type" property="taskType"/>
+        <result column="task_status" property="taskStatus"/>
+        <result column="task_param" property="taskParam"/>
+    </resultMap>
+
+    <parameterMap id="TaskParameterMap" type="taskBean">
+        <parameter property="taskId" jdbcType="INTEGER" resultMap="TaskResultMap"/>
+        <parameter property="taskName" jdbcType="VARCHAR" resultMap="TaskResultMap"/>
+        <parameter property="createTime" jdbcType="VARCHAR" resultMap="TaskResultMap"/>
+        <parameter property="startTime" jdbcType="VARCHAR" resultMap="TaskResultMap"/>
+        <parameter property="finishTime" jdbcType="VARCHAR" resultMap="TaskResultMap"/>
+        <parameter property="taskType" jdbcType="VARCHAR" resultMap="TaskResultMap"/>
+        <parameter property="taskStatus" jdbcType="VARCHAR" resultMap="TaskResultMap"/>
+        <parameter property="taskParam" jdbcType="VARCHAR" resultMap="TaskResultMap"/>
+    </parameterMap>
+
+    <insert id="addTask" parameterMap="TaskParameterMap">
+    INSERT INTO task (
+        task_id,
+        task_name,
+        create_time,
+        start_time,
+        finish_time,
+        task_type,
+        task_status,
+        task_param
+        )
+    VALUES (
+        #{taskId},
+        #{taskName},
+        #{createTime},
+        #{startTime},
+        #{finishTime},
+        #{taskType},
+        #{taskStatus},
+        #{taskParam}
+        )
+    </insert>
+
+    <select id="getTaskCount" resultType="java.lang.Integer">
+         SELECT count(1)
+         FROM task
+    </select>
+
+    <select id="getTaskInfo" resultMap="TaskResultMap">
+        SELECT *
+        FROM task
+    </select>
+
+    <select id="getTaskById" resultMap="TaskResultMap">
+        SELECT *
+        FROM task
+        WHERE task_id = #{0}
+    </select>
+
+</mapper>

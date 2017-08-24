@@ -1,0 +1,14 @@
+# You should rename this file as my.properties
+
+spark.local=true
+spark.master=local[2]
+spark.streaming.collect.time=3
+spark.local.socket.port=8888
+spark.local.check.point.dir=hdfs://localhost:9000/checkpoint/
+spark.local.data.source=hdfs://localhost:9000/source/
+spark.check.point.dir=hdfs://node-01:9000/wifiProbe/checkpoint/
+spark.data.source=hdfs://node-01:9000/wifiProbe/source/
+kafka.zookeeper.quorum=120.24.238.195:9092,120.25.162.32:9092,112.74.114.226:9092
+kafka.group.id=group1
+kafka.topics=test-remote
+kafka.number.partitions=4

@@ -1,0 +1,5 @@
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost:3306/WIFIProbeAnalysis?characterEncoding=UTF-8&useSSL=false
+jdbc.username=root
+jdbc.password=yuanhao110110
+jdbc.urlRemote=jdbc:mysql://116.62.41.211:3306/WIFIProbeAnalysis?characterEncoding=UTF-8&useSSL=false

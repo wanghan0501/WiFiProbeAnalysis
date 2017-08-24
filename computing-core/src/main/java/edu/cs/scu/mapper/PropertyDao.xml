@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.cs.scu.dao.PropertyDao">
+    <resultMap id="PropertyResultMap" type="propertyBean">
+        <result column="property_id" property="propertyId"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="mmac" property="mmac"/>
+        <result column="visit_cycle" property="visitCycle"/>
+        <result column="visit_range" property="visitRange"/>
+        <result column="visit_rssi" property="visitRSSI"/>
+        <result column="activity_degree" property="activityDegree"/>
+        <result column="visit_time_split" property="visitTimeSplit"/>
+        <result column="property_type" property="propertyType"/>
+    </resultMap>
+
+    <parameterMap id="PropertyParameterMap" type="propertyBean">
+        <parameter property="propertyId" jdbcType="INTEGER" resultMap="PropertyResultMap"/>
+        <parameter property="shopId" jdbcType="INTEGER" resultMap="PropertyResultMap"/>
+        <parameter property="mmac" jdbcType="CHAR" resultMap="PropertyResultMap"/>
+        <parameter property="visitCycle" jdbcType="VARCHAR" resultMap="PropertyResultMap"/>
+        <parameter property="visitRange" jdbcType="DOUBLE" resultMap="PropertyResultMap"/>
+        <parameter property="visitRSSI" jdbcType="INTEGER" resultMap="PropertyResultMap"/>
+        <parameter property="activityDegree" jdbcType="VARCHAR" resultMap="PropertyResultMap"/>
+        <parameter property="visitTimeSplit" jdbcType="VARCHAR" resultMap="PropertyResultMap"/>
+        <parameter property="propertyType" jdbcType="TINYINT" resultMap="PropertyResultMap"/>
+    </parameterMap>
+
+    <update id="setyPropertyNotUse" parameterMap="PropertyParameterMap">
+        UPDATE property
+        SET property_type=FALSE
+        WHERE shop_id=#{shopId} AND mmac=#{mmac} AND visit_cycle=#{visitCycle}
+        AND visit_range=#{visitRange} AND visit_rssi=#{visitRange}
+        AND activity_degree=#{activityDegree} AND visit_time_split=#{visitTimeSplit}
+    </update>
+
+    <update id="setPropertyUse" parameterMap="PropertyParameterMap">
+        UPDATE property
+        SET property_type=TRUE
+        WHERE shop_id=#{shopId} AND mmac=#{mmac} AND visit_cycle=#{visitCycle}
+        AND visit_range=#{visitRange} AND visit_rssi=#{visitRange}
+        AND activity_degree=#{activityDegree} AND visit_time_split=#{visitTimeSplit}
+    </update>
+
+    <select id="getPropertyById" resultMap="PropertyResultMap">
+        SELECT *
+        FROM  property
+        WHERE property_id = #{0}
+    </select>
+
+    <select id="getNewProperty" resultMap="PropertyResultMap">
+        SELECT *
+        FROM property a
+        WHERE a.property_id in (
+        SELECT max(b.property_id)
+        FROM property b
+        )
+    </select>
+
+    <select id="isUse" parameterMap="PropertyParameterMap" resultType="java.lang.Boolean">
+        SELECT COUNT(*)
+        FROM property
+        WHERE shop_id=#{shopId} AND mmac=#{mmac}
+    </select>
+
+</mapper>

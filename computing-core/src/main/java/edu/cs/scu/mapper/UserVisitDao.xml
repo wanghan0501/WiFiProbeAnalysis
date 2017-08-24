@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.cs.scu.dao.UserVisitDao">
+    <resultMap id="UserVisitResultMap" type="userVisitBean">
+        <result column="shop_id" property="shopId"/>
+        <result column="mmac" property="mmac"/>
+        <result column="time" property="time"/>
+        <result column="total_flow" property="totalFlow"/>
+        <result column="check_in_flow" property="checkInFlow"/>
+        <result column="check_in_rate" property="checkInRate"/>
+        <result column="shallow_visit_rate" property="shallowVisitRate"/>
+        <result column="deep_visit_rate" property="deepVisitRate"/>
+    </resultMap>
+
+    <parameterMap id="UserVisitParameterMap" type="userVisitBean">
+        <parameter property="shopId" jdbcType="INTEGER" resultMap="UserVisitResultMap"/>
+        <parameter property="mmac" jdbcType="CHAR" resultMap="UserVisitResultMap"/>
+        <parameter property="time" jdbcType="VARCHAR" resultMap="UserVisitResultMap"/>
+        <parameter property="totalFlow" jdbcType="INTEGER" resultMap="UserVisitResultMap"/>
+        <parameter property="checkInFlow" jdbcType="INTEGER" resultMap="UserVisitResultMap"/>
+        <parameter property="checkInRate" jdbcType="DOUBLE" resultMap="UserVisitResultMap"/>
+        <parameter property="shallowVisitRate" jdbcType="DOUBLE" resultMap="UserVisitResultMap"/>
+        <parameter property="deepVisitRate" jdbcType="DOUBLE" resultMap="UserVisitResultMap"/>
+    </parameterMap>
+
+    <insert id="addUserVisit" parameterMap="UserVisitParameterMap">
+        INSERT INTO user_visit (
+        shop_id,
+        mmac,
+        time,
+        total_flow,
+        check_in_flow,
+        check_in_rate,
+        shallow_visit_rate,
+        deep_visit_rate
+        )
+        VALUES (
+        #{shopId},
+        #{mmac},
+        #{time},
+        #{totalFlow},
+        #{checkInFlow},
+        #{checkInRate},
+        #{shallowVisitRate},
+        #{deepVisitRate}
+        )
+    </insert>
+
+    <insert id="addUserVisitByBatch">
+        INSERT INTO user_visit (
+        shop_id,
+        mmac,
+        time,
+        total_flow,
+        check_in_flow,
+        check_in_rate,
+        shallow_visit_rate,
+        deep_visit_rate
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.shopId},
+            #{item.mmac},
+            #{item.time},
+            #{item.totalFlow},
+            #{item.checkInFlow},
+            #{item.checkInRate},
+            #{item.shallowVisitRate},
+            #{item.deepVisitRate}
+            )
+        </foreach>
+    </insert>
+
+
+</mapper>

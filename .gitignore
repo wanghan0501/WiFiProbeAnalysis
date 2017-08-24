@@ -1,0 +1,45 @@
+# Eclipse IDE files
+**/.classpath
+**/.project
+**/.settings/
+
+# intellj IDE files
+**/*.iml
+**/.idea/
+
+# Apple OS X related
+**/.DS_Store
+
+# build generated
+**/target/
+**/build/
+
+# intermediately generated locally
+**/logs/
+**/lib/
+**/*.log
+**/output/
+
+# jar package
+**/*.jar
+
+# csv files
+**/*.csv
+
+# property files
+**/*.properties
+
+# spark meta data
+**/spark-warehouse/
+
+# local test config
+**/wifiProbe/
+
+# NodeJS files
+**/node_modules
+**/bower_components
+**/app/dist
+**/app/vendor
+**/package-lock.json
+**/tags
+
