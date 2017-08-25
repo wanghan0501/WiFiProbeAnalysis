@@ -1,4 +1,4 @@
-package edu.cs.scu.constants;
+package edu.cs.scu.common.constants;
 
 /**
  * 与spark集群相关常量接口类

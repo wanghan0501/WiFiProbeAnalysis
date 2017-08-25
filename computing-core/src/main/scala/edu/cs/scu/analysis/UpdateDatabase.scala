@@ -1,7 +1,7 @@
-package edu.cs.scu.analyse
+package edu.cs.scu.analysis
 
 import edu.cs.scu.bean.{UserBean, UserVisitTimeBean}
-import edu.cs.scu.constants.TableConstants
+import edu.cs.scu.common.constants.TableConstants
 import edu.cs.scu.dao.impl.{UserDaoImpl, UserVisitTimeDaoImpl}
 import edu.cs.scu.javautils.StringUtil
 import org.apache.spark.streaming.dstream.DStream
@@ -55,7 +55,7 @@ object UpdateDatabase {
           val userVisitTime = new UserVisitTimeBean
           userVisitTime.setShopId(1)
           userVisitTime.setMac(l._2)
-          userVisitTime.setVisitTime(StringUtil.getFieldFromConcatString(l._1, "\\|", TableConstants.FIELD_TIME))
+          userVisitTime.setVisitTime(StringUtil.getFieldFromConcatString(l._1, "\\|", TableConstants.FIELD_TIME).toLong)
           userVisitTime
         }).collect().toList
 

@@ -60,8 +60,7 @@ public class VendorMacDaoImpl implements VendorMacDao {
             VendorMacDao vendorMacDao = sqlSession.getMapper(VendorMacDao.class);
             vendorMacBean = vendorMacDao.getVendorByMac(mac);
         } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getStackTrace());
+            vendorMacBean = null;
         } finally {
             sqlSession.close();
         }

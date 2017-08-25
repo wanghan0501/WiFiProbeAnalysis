@@ -24,7 +24,7 @@ public class StringUtil {
      * @param field     指定的字段
      * @return
      */
-    public static synchronized String getFieldFromConcatString(String str, String delimiter, String field) {
+    public static String getFieldFromConcatString(String str, String delimiter, String field) {
 
         try {
             String[] fields = str.split(delimiter);
@@ -55,7 +55,7 @@ public class StringUtil {
      * @param newfiledValue 新值
      * @return String
      */
-    public static synchronized String setFieldInConcatString(String str, String delimiter, String field, String newfiledValue) {
+    public static String setFieldInConcatString(String str, String delimiter, String field, String newfiledValue) {
 
         String[] fields = str.split(delimiter);
         for (int i = 0; i < fields.length; i++) {
@@ -88,7 +88,7 @@ public class StringUtil {
      * @param field
      * @return
      */
-    public static synchronized String deleteFieldFromConcatString(String str, String delimiter, String field) {
+    public static String deleteFieldFromConcatString(String str, String delimiter, String field) {
         String[] fields = str.split(delimiter);
         StringBuffer buffer = new StringBuffer("");
         int item = 0;

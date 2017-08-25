@@ -18,9 +18,9 @@
     <parameterMap id="TaskParameterMap" type="taskBean">
         <parameter property="taskId" jdbcType="INTEGER" resultMap="TaskResultMap"/>
         <parameter property="taskName" jdbcType="VARCHAR" resultMap="TaskResultMap"/>
-        <parameter property="createTime" jdbcType="VARCHAR" resultMap="TaskResultMap"/>
-        <parameter property="startTime" jdbcType="VARCHAR" resultMap="TaskResultMap"/>
-        <parameter property="finishTime" jdbcType="VARCHAR" resultMap="TaskResultMap"/>
+        <parameter property="createTime" jdbcType="INTEGER" resultMap="TaskResultMap"/>
+        <parameter property="startTime" jdbcType="INTEGER" resultMap="TaskResultMap"/>
+        <parameter property="finishTime" jdbcType="INTEGER" resultMap="TaskResultMap"/>
         <parameter property="taskType" jdbcType="VARCHAR" resultMap="TaskResultMap"/>
         <parameter property="taskStatus" jdbcType="VARCHAR" resultMap="TaskResultMap"/>
         <parameter property="taskParam" jdbcType="VARCHAR" resultMap="TaskResultMap"/>

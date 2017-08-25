@@ -14,7 +14,7 @@ public class UserVisitBean implements Serializable {
 
     private int shopId;
     private String mmac;
-    private String time;
+    private long time;
     private int totalFlow;
     private int checkInFlow;
     private double checkInRate;
@@ -45,11 +45,11 @@ public class UserVisitBean implements Serializable {
         this.mmac = mmac;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 

@@ -1,6 +1,6 @@
 package edu.cs.scu.javautils;
 
-import edu.cs.scu.constants.TimeConstants;
+import edu.cs.scu.common.types.TimeTypes;
 import org.apache.log4j.Logger;
 
 import java.text.ParseException;
@@ -22,142 +22,58 @@ public class DateUtil {
 
     // 得到log记录器
     private static final Logger logger = Logger.getLogger(DateUtil.class);
-    private static final SimpleDateFormat ENGLISH_TIME_FORMAT = new SimpleDateFormat("EEE MMM d HH:mm:ss yyyy", Locale.ENGLISH);
-    private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
-     * 获取现在时间（yyyy-MM-dd HH:mm:ss）
+     * 获取现在时间
      *
      * @return 此刻时间
      */
-    public static synchronized String getToday() {
-        return TIME_FORMAT.format(new Date());
+    public static long getCurrentTime() {
+        return new Date().getTime();
     }
 
     /**
-     *
      * @param time
-     * @param timeConstants
+     * @param timeTypes
      * @return
      */
-    public static synchronized String parseTime(String time,TimeConstants timeConstants) {
+    public static long parseTime(String time, TimeTypes timeTypes) {
         try {
-            switch (timeConstants){
+            switch (timeTypes) {
                 case ENGLISH_TIME_FORMAT:
-                    return ENGLISH_TIME_FORMAT.format(ENGLISH_TIME_FORMAT.parse(time));
+                    SimpleDateFormat englishTimeFormat = new SimpleDateFormat("EEE MMM d HH:mm:ss yyyy", Locale.ENGLISH);
+                    return englishTimeFormat.parse(time).getTime();
                 case TIME_FORMAT:
-                    return TIME_FORMAT.format(ENGLISH_TIME_FORMAT.parse(time));
+                    SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    return timeFormat.parse(time).getTime();
                 case DATE_FORMAT:
-                    return DATE_FORMAT.format(TIME_FORMAT.parse(time));
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    return dateFormat.parse(time).getTime();
             }
 
         } catch (ParseException e) {
-            logger.error(e.getStackTrace());
-            System.err.println(e.getStackTrace());
+            System.err.println("Current TimeTypes is : " + timeTypes.toString());
+            logger.error("Current TimeTypes is : " + timeTypes.toString());
         }
 
-        return null;
+        return 0L;
     }
 
-    /**
-     *
-     * @param time1
-     * @param time2
-     * @param timeConstants
-     * @return
-     */
-    public static synchronized boolean before(String time1, String time2,TimeConstants timeConstants) {
-        try {
-            Date dateTime1 = null;
-            Date dateTime2 = null;
-            switch (timeConstants){
-                case ENGLISH_TIME_FORMAT:
-                    dateTime1 = ENGLISH_TIME_FORMAT.parse(time1);
-                    dateTime2 = ENGLISH_TIME_FORMAT.parse(time2);
-                    break;
-                case TIME_FORMAT:
-                    dateTime1 = TIME_FORMAT.parse(time1);
-                    dateTime2 = TIME_FORMAT.parse(time2);
-                    break;
-            }
-            if (dateTime1.before(dateTime2)) {
-                return true;
-            }
-        } catch (Exception e) {
-            logger.error(e.getStackTrace());
-            System.err.println(e.getStackTrace());
-        }
-
-        return false;
-    }
-
-
-    /**
-     * 判断一个时间是否在另一个时间之后
-     *
-     * @param time1
-     * @param time2
-     * @param timeConstants
-     * @return
-     */
-    public static synchronized boolean after(String time1, String time2,TimeConstants timeConstants) {
-        try {
-            Date dateTime1 = null;
-            Date dateTime2 = null;
-            switch (timeConstants){
-                case ENGLISH_TIME_FORMAT:
-                    dateTime1 = ENGLISH_TIME_FORMAT.parse(time1);
-                    dateTime2 = ENGLISH_TIME_FORMAT.parse(time2);
-                    break;
-                case TIME_FORMAT:
-                    dateTime1 = TIME_FORMAT.parse(time1);
-                    dateTime2 = TIME_FORMAT.parse(time2);
-                    break;
-            }
-            if (dateTime1.after(dateTime2)) {
-                return true;
-            }
-        } catch (Exception e) {
-            logger.error(e.getStackTrace());
-            System.err.println(e.getStackTrace());
-        }
-
-        return false;
-    }
 
     /**
      * 判断第二个时间是否在第一个时间之后
      *
      * @param time1
      * @param time2
-     * @param timeConstants 解析的时间类型，枚举变量
      * @param intervalMillisecond 间隔时常，单位毫秒
      * @return
      */
-    public static synchronized boolean after(String time1, String time2,TimeConstants timeConstants, long intervalMillisecond) {
-        try {
-            Date dateTime1 = null;
-            Date dateTime2 = null;
-            switch (timeConstants){
-                case ENGLISH_TIME_FORMAT:
-                    dateTime1 = ENGLISH_TIME_FORMAT.parse(time1);
-                    dateTime2 = ENGLISH_TIME_FORMAT.parse(time2);
-                    break;
-                case TIME_FORMAT:
-                    dateTime1 = TIME_FORMAT.parse(time1);
-                    dateTime2 = TIME_FORMAT.parse(time2);
-                    break;
-            }
-            if (dateTime2.getTime() - dateTime1.getTime() >= intervalMillisecond) {
-                return true;
-            }
-        } catch (Exception e) {
-            logger.error(e.getStackTrace());
-            System.err.println(e.getStackTrace());
+    public static boolean after(long time1, long time2, long intervalMillisecond) {
+        if (time2 - time1 >= intervalMillisecond) {
+            return true;
+        } else {
+            return false;
         }
-
-        return false;
     }
 }
 

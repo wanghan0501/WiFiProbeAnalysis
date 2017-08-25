@@ -1,4 +1,4 @@
-package edu.cs.scu.constants;
+package edu.cs.scu.common.constants;
 
 /**
  * 与时间相关的常量接口

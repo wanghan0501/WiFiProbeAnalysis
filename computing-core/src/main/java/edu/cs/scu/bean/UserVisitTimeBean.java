@@ -17,7 +17,7 @@ public class UserVisitTimeBean implements Serializable {
     // Mac地址
     private String mac;
     // 访问时间
-    private String visitTime;
+    private long visitTime;
 
     public static long getSerialVersinUID() {
         return serialVersinUID;
@@ -39,11 +39,11 @@ public class UserVisitTimeBean implements Serializable {
         this.mac = mac;
     }
 
-    public String getVisitTime() {
+    public long getVisitTime() {
         return visitTime;
     }
 
-    public void setVisitTime(String visitTime) {
+    public void setVisitTime(long visitTime) {
         this.visitTime = visitTime;
     }
 }

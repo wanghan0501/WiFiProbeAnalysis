@@ -1,4 +1,4 @@
-package edu.cs.scu.analyse
+package edu.cs.scu.analysis
 
 import edu.cs.scu.scalautils.InitUtil
 import org.apache.spark.streaming.StreamingContext

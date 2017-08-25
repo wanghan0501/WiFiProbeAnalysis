@@ -1,4 +1,4 @@
-package edu.cs.scu.analyse
+package edu.cs.scu.analysis
 
 /**
   * 离线数据分析

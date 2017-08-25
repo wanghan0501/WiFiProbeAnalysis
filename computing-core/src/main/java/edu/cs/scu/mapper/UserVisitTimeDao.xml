@@ -13,7 +13,7 @@
         <parameter property="autoId" jdbcType="INTEGER" resultMap="UserVisitTimeResultMap"/>
         <parameter property="shopId" jdbcType="INTEGER" resultMap="UserVisitTimeResultMap"/>
         <parameter property="mac" jdbcType="VARCHAR" resultMap="UserVisitTimeResultMap"/>
-        <parameter property="visitTime" jdbcType="CHAR" resultMap="UserVisitTimeResultMap"/>
+        <parameter property="visitTime" jdbcType="INTEGER" resultMap="UserVisitTimeResultMap"/>
     </parameterMap>
 
 
@@ -33,7 +33,7 @@
         </foreach>
     </insert>
 
-    <select id="getFirstVisitTIme" resultType="java.lang.String">
+    <select id="getFirstVisitTIme" resultType="java.lang.Long">
         SELECT visit_time
         FROM user_visit_time
         WHERE shop_id=#{0} AND mac=#{1}

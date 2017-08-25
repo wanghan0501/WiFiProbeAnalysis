@@ -1,7 +1,7 @@
 package edu.cs.scu.scalautils
 
 import edu.cs.scu.bean.PropertyBean
-import edu.cs.scu.constants.{TableConstants, TimeConstants}
+import edu.cs.scu.common.constants.TableConstants
 import edu.cs.scu.dao.impl.UserVisitTimeDaoImpl
 import edu.cs.scu.javautils.{DateUtil, MacAdressUtil, StringUtil}
 import org.apache.log4j.Logger
@@ -34,26 +34,26 @@ object DataUtil {
     * @param originDStream
     * @return (t,id,mmac,rate,time,vmac,wssid)
     */
-//  def getPreDStream(sQLContext: SQLContext, originDStream: DStream[String]):
-//  DStream[(Row, String, String, String, String, String, String)] = {
-//    val preDStream = originDStream.transform(rdd => {
-//      val df = sQLContext.read.json(rdd)
-//      val preData = df.flatMap(t => {
-//        val id = t.getString(1)
-//        // Wi-Fi探针Mac地址
-//        val mmac = t.getString(2)
-//        val rate = t.getString(3)
-//        val time = DateUtil.parseTime(t.getString(4), TimeConstants.TIME_FORMAT)
-//        val wmac = t.getString(5)
-//        val wssid = t.getString(6)
-//        val data = t.getSeq(0).asInstanceOf[Seq[Row]].iterator
-//        val preIterator = data.map(t => (t, id, mmac, rate, time, wmac, wssid))
-//        preIterator
-//      })
-//      preData
-//    })
-//    preDStream
-//  }
+  //  def getPreDStream(sQLContext: SQLContext, originDStream: DStream[String]):
+  //  DStream[(Row, String, String, String, String, String, String)] = {
+  //    val preDStream = originDStream.transform(rdd => {
+  //      val df = sQLContext.read.json(rdd)
+  //      val preData = df.flatMap(t => {
+  //        val id = t.getString(1)
+  //        // Wi-Fi探针Mac地址
+  //        val mmac = t.getString(2)
+  //        val rate = t.getString(3)
+  //        val time = DateUtil.parseTime(t.getString(4), TimeTypes.TIME_FORMAT)
+  //        val wmac = t.getString(5)
+  //        val wssid = t.getString(6)
+  //        val data = t.getSeq(0).asInstanceOf[Seq[Row]].iterator
+  //        val preIterator = data.map(t => (t, id, mmac, rate, time, wmac, wssid))
+  //        preIterator
+  //      })
+  //      preData
+  //    })
+  //    preDStream
+  //  }
 
   /**
     * 获得原始数据中data字段中的手机数据,并处理统计
@@ -149,10 +149,10 @@ object DataUtil {
     * @param time   访问时间
     * @return
     */
-  def isDeepVisit(shopId: Int, mac: String, time: String): Boolean = {
+  def isDeepVisit(shopId: Int, mac: String, time: Long): Boolean = {
     val userVisitTimeDao = new UserVisitTimeDaoImpl
-    val fisrtTIme = userVisitTimeDao.getFirstVisitTIme(shopId, mac)
-    DateUtil.after(fisrtTIme, time, TimeConstants.TIME_FORMAT, property.getVisitTimeSplit.toLong)
+    val fisrtTIme = userVisitTimeDao.getFirstVisitTIme(shopId, mac).toLong
+    DateUtil.after(fisrtTIme, time, property.getVisitTimeSplit.toLong)
   }
 
 
@@ -235,8 +235,7 @@ object DataUtil {
     val brandData = phoneData.map(t => {
       val key = t._1
       val time = StringUtil.getFieldFromConcatString(key, "\\|", TableConstants.FIELD_TIME)
-      val newKey = StringUtil.setFieldInConcatString(key, "\\|", TableConstants.FIELD_TIME,
-        DateUtil.parseTime(time, TimeConstants.DATE_FORMAT))
+      val newKey = StringUtil.setFieldInConcatString(key, "\\|", TableConstants.FIELD_TIME, time)
       (newKey, 1)
     })
 

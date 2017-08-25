@@ -1,9 +1,10 @@
-package edu.cs.scu.analyse
+package edu.cs.scu.analysis
 
 import java.util
 
 import edu.cs.scu.bean.{UserBean, UserVisitBean, UserVisitTimeBean}
-import edu.cs.scu.constants.TimeConstants
+import edu.cs.scu.common.constants.AnalysisConstants
+import edu.cs.scu.common.types.TimeTypes
 import edu.cs.scu.dao.impl.{UserDaoImpl, UserVisitDaoImpl, UserVisitTimeDaoImpl}
 import edu.cs.scu.javautils.{DateUtil, MacAdressUtil}
 import edu.cs.scu.scalautils.DataUtil
@@ -40,27 +41,27 @@ object RealTimeAnalysis {
         val df = sparkSession.read
           .json(rdd)
         // 打印表结构
-        //df.printSchema()
-        val dfRDD = df.foreach(t => {
+        //        df.printSchema()
+        df.foreach(t => {
           // 地址信息
-          val addr = t.getString(0)
-          val datas = t.getSeq(1).asInstanceOf[Seq[Row]]
+          val addr = t.getString(t.fieldIndex(AnalysisConstants.FIELD_ARRD))
+          val datas = t.getSeq(t.fieldIndex(AnalysisConstants.FIELD_DATA)).asInstanceOf[Seq[Row]]
           // 嗅探器设备id
-          val id = t.getString(2)
+          val id = t.getString(t.fieldIndex(AnalysisConstants.FIELD_ID))
           // 纬度
-          val lat = t.getString(3).toDouble
+          val lat = t.getString(t.fieldIndex(AnalysisConstants.FIELD_LAT)).toDouble
           // 经度
-          val lon = t.getString(4).toDouble
+          val lon = t.getString(t.fieldIndex(AnalysisConstants.FIELD_LON)).toDouble
           // 嗅探器设备自身WiFi mac
-          val mmac = t.getString(5)
+          val mmac = t.getString(t.fieldIndex(AnalysisConstants.FIELD_MMAC))
           // 发送频率
-          val rate = t.getString(6)
+          val rate = t.getString(t.fieldIndex(AnalysisConstants.FIELD_RATE))
           // 时间戳，采集到这些mac的时间
-          val time = DateUtil.parseTime(t.getString(7), TimeConstants.TIME_FORMAT)
+          val time = DateUtil.parseTime(t.getString(t.fieldIndex(AnalysisConstants.FIELD_TIME)), TimeTypes.ENGLISH_TIME_FORMAT)
           // 嗅探器设备连接的WIFI的mac地址
-          val wmac = t.getString(8)
+          val wmac = t.getString(t.fieldIndex(AnalysisConstants.FIELD_WMAC))
           // 嗅探器设备连接的WIFI的ssid
-          val wssid = t.getString(9)
+          val wssid = t.getString(t.fieldIndex(AnalysisConstants.FIELD_WSSID))
 
           // 总人数，根据mac地址判断
           var totalFlow: Int = 0
@@ -77,20 +78,20 @@ object RealTimeAnalysis {
           while (datasIterator.hasNext) {
             val currentData = datasIterator.next()
             // 手机是否睡眠
-            val ds = currentData.getString(0)
+            val ds = currentData.getString(currentData.fieldIndex(AnalysisConstants.FIELD_DS))
             // 采集到的手机mac地址
-            val mac = currentData.getString(1)
+            val mac = currentData.getString(currentData.fieldIndex(AnalysisConstants.FIELD_MAC))
             totalFlow = totalFlow + 1
             // 手机距离嗅探器的测距距离字段，单位米
-            val range = currentData.getString(2).toDouble
+            val range = currentData.getString(currentData.fieldIndex(AnalysisConstants.FIELD_RANGE)).toDouble
             // 探针是否探测到路由设备
-            val router = currentData.getString(3)
+            val router = currentData.getString(currentData.fieldIndex(AnalysisConstants.FIELD_ROUTER))
             // 手机的信号强度
-            val rssi = currentData.getString(4).toInt
+            val rssi = currentData.getString(currentData.fieldIndex(AnalysisConstants.FIELD_RSSI)).toInt
             // 是否与路由器相连
-            val tc = currentData.getString(5)
+            val tc = currentData.getString(currentData.fieldIndex(AnalysisConstants.FIELD_TC))
             // 目标设备的mac地址，手机连接的WIFI的mac地址
-            val tmac = currentData.getString(6)
+            val tmac = currentData.getString(currentData.fieldIndex(AnalysisConstants.FIELD_TMAC))
 
             // 判断用户是否入店
             if (DataUtil.isCheckIn(range, rssi)) {

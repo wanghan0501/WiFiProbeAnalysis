@@ -2,7 +2,7 @@ package edu.cs.scu.scalautils
 
 import edu.cs.scu.bean.PropertyBean
 import edu.cs.scu.conf.ConfigurationManager
-import edu.cs.scu.constants.SparkConstants
+import edu.cs.scu.common.constants.SparkConstants
 import edu.cs.scu.dao.impl.PropertyDaoImpl
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.log4j.Logger

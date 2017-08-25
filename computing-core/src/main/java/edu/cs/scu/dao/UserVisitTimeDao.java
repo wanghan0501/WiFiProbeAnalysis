@@ -14,5 +14,5 @@ public interface UserVisitTimeDao {
 
     void addUserVisitTimeByBatch(List<UserVisitTimeBean> userVisitTimeBeanList);
 
-    String getFirstVisitTIme(int shopId,String mac);
+    long getFirstVisitTIme(int shopId,String mac);
 }

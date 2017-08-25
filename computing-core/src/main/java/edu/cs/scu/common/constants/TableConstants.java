@@ -1,4 +1,4 @@
-package edu.cs.scu.constants;
+package edu.cs.scu.common.constants;
 
 /**
  * Created by Wang Han on 2017/6/21 16:21.

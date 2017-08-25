@@ -15,11 +15,11 @@ public class TaskBean implements Serializable {
 
     private static final long serialVersinUID = 351877796426921776L;
 
-    private Long taskId;
+    private long taskId;
     private String taskName;
-    private String createTime;
-    private String startTime;
-    private String finishTime;
+    private long createTime;
+    private long startTime;
+    private long finishTime;
     private String taskType;
     private String taskStatus;
     private String taskParam;
@@ -28,8 +28,10 @@ public class TaskBean implements Serializable {
         return serialVersinUID;
     }
 
-    public TaskBean(Long taskId, String taskName, String createTime, String startTime,
-                    String finishTime, String taskType, String taskStatus, String taskParam) {
+    public TaskBean() {
+    }
+
+    public TaskBean(long taskId, String taskName, long createTime, long startTime, long finishTime, String taskType, String taskStatus, String taskParam) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.createTime = createTime;
@@ -40,9 +42,6 @@ public class TaskBean implements Serializable {
         this.taskParam = taskParam;
     }
 
-    public TaskBean(){
-
-    }
     public long getTaskId() {
         return taskId;
     }
@@ -59,27 +58,27 @@ public class TaskBean implements Serializable {
         this.taskName = taskName;
     }
 
-    public String getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 
-    public String getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 
-    public String getFinishTime() {
+    public long getFinishTime() {
         return finishTime;
     }
 
-    public void setFinishTime(String finishTime) {
+    public void setFinishTime(long finishTime) {
         this.finishTime = finishTime;
     }
 
@@ -106,5 +105,4 @@ public class TaskBean implements Serializable {
     public void setTaskParam(String taskParam) {
         this.taskParam = taskParam;
     }
-
 }

@@ -18,7 +18,7 @@
     <parameterMap id="UserVisitParameterMap" type="userVisitBean">
         <parameter property="shopId" jdbcType="INTEGER" resultMap="UserVisitResultMap"/>
         <parameter property="mmac" jdbcType="CHAR" resultMap="UserVisitResultMap"/>
-        <parameter property="time" jdbcType="VARCHAR" resultMap="UserVisitResultMap"/>
+        <parameter property="time" jdbcType="INTEGER" resultMap="UserVisitResultMap"/>
         <parameter property="totalFlow" jdbcType="INTEGER" resultMap="UserVisitResultMap"/>
         <parameter property="checkInFlow" jdbcType="INTEGER" resultMap="UserVisitResultMap"/>
         <parameter property="checkInRate" jdbcType="DOUBLE" resultMap="UserVisitResultMap"/>

@@ -6,7 +6,7 @@
 
 ## Dependency Version
 
-* Hadoop: 2.8.1
+* Hadoop: 2.7.4
 * HBase: 1.3.0
 * Spark: 2.2.0
 * Scala: 2.11.11
