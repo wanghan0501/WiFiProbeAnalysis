@@ -10,8 +10,6 @@ import java.io.Serializable;
 public class UserVisitTimeBean implements Serializable {
     private static final long serialVersinUID = 351877796426921776L;
 
-    // 自增长ID
-    private int autoId;
     // 商店ID
     private int shopId;
     // Mac地址
