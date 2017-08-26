@@ -7,10 +7,7 @@
 
     <typeAliases>
         <typeAlias type="edu.cs.scu.bean.TaskBean" alias="taskBean"/>
-        <typeAlias type="edu.cs.scu.bean.UserVisitBean" alias="userVisitBean"/>
         <typeAlias type="edu.cs.scu.bean.PropertyBean" alias="propertyBean"/>
-        <typeAlias type="edu.cs.scu.bean.UserBean" alias="userBean"/>
-        <typeAlias type="edu.cs.scu.bean.UserVisitTimeBean" alias="userVisitTimeBean"/>
         <typeAlias type="edu.cs.scu.bean.ShopBean" alias="shopBean"/>
         <typeAlias type="edu.cs.scu.bean.VendorMacBean" alias="vendorMacBean"/>
     </typeAliases>
@@ -31,10 +28,7 @@
     </environments>
     <mappers>
         <mapper resource="edu/cs/scu/mapper/TaskDao.xml"/>
-        <mapper resource="edu/cs/scu/mapper/UserVisitDao.xml"/>
         <mapper resource="edu/cs/scu/mapper/PropertyDao.xml"/>
-        <mapper resource="edu/cs/scu/mapper/UserDao.xml"/>
-        <mapper resource="edu/cs/scu/mapper/UserVisitTimeDao.xml"/>
         <mapper resource="edu/cs/scu/mapper/ShopDao.xml"/>
         <mapper resource="edu/cs/scu/mapper/VendorMacDao.xml"/>
     </mappers>

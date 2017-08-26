@@ -1,51 +1,47 @@
 package edu.cs.scu.dao.impl;
 
+import com.alibaba.fastjson.JSON;
 import edu.cs.scu.bean.UserVisitBean;
-import edu.cs.scu.conf.MybatisSqlSession;
-import edu.cs.scu.dao.UserVisitDao;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.log4j.Logger;
+import edu.cs.scu.common.constants.TableConstants;
+import edu.cs.scu.conf.JedisPoolManager;
+import edu.cs.scu.dao.BaseDao;
+import redis.clients.jedis.ShardedJedis;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * Created by Wang Han on 2017/6/18 15:19.
+ * <p>
+ * Created by Wang Han on 2017/6/18 15:18.
  * E-mail address is wanghan0501@vip.qq.com.
  * Copyright © 2017 Wang Han. SCU. All Rights Reserved.
  */
-public class UserVisitDaoImpl implements UserVisitDao {
-    // 得到log记录器
-    private static final Logger logger = Logger.getLogger(UserVisitDaoImpl.class);
+public class UserVisitDaoImpl extends BaseDao {
 
     @Override
-    public void addUserVisit(UserVisitBean userVisitBean) {
-        SqlSession sqlSession = MybatisSqlSession.getSqlSession();
-
-        try {
-            UserVisitDao userVisitDao = sqlSession.getMapper(UserVisitDao.class);
-            userVisitDao.addUserVisit(userVisitBean);
-            sqlSession.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getStackTrace());
-        } finally {
-            sqlSession.close();
+    public void add(List<Object> objectList) {
+        ShardedJedis jedis = JedisPoolManager.getResource();
+        Map<String, String> tableMap = new HashMap<>();
+        for (Object o : objectList) {
+            UserVisitBean userVisitBean = (UserVisitBean) o;
+            String Key = String.valueOf(userVisitBean.getShopId()) + "||"
+                + userVisitBean.getMmac() + "||"
+                + String.valueOf(userVisitBean.getTime());
+            String value = JSON.toJSONString(userVisitBean);
+            tableMap.put(Key, value);
         }
+        jedis.hmset(TableConstants.TABLE_USER_VISIT, tableMap);
+        jedis.close();
     }
 
     @Override
-    public void addUserVisitByBatch(List<UserVisitBean> userVisitBeanList) {
-        SqlSession sqlSession = MybatisSqlSession.getSqlSession();
+    public Object get(String key) {
+        return null;
+    }
 
-        try {
-            UserVisitDao userVisitDao = sqlSession.getMapper(UserVisitDao.class);
-            userVisitDao.addUserVisitByBatch(userVisitBeanList);
-            sqlSession.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getStackTrace());
-        } finally {
-            sqlSession.close();
-        }
+    @Override
+    public List<Object> get(List<String> keys) {
+        return null;
     }
 }

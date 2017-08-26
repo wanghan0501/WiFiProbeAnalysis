@@ -25,4 +25,6 @@ public interface AnalysisConstants {
     String FIELD_ARRD = "addr";
     String FIELD_LAT = "lat";
     String FIELD_LON = "lon";
+
+    long DEFAULT_FIRST_VISIT_TIME = 0L;
 }

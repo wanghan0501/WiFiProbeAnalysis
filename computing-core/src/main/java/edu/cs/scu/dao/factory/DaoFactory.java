@@ -22,15 +22,15 @@ public class DaoFactory {
         return new TaskDaoImpl();
     }
 
-    public static UserDao getUserDao() {
+    public static UserDaoImpl getUserDao() {
         return new UserDaoImpl();
     }
 
-    public static UserVisitDao getUserVisitDao() {
+    public static UserVisitDaoImpl getUserVisitDao() {
         return new UserVisitDaoImpl();
     }
 
-    public static UserVisitTimeDao getUserVisitTimeDao() {
+    public static UserVisitTimeDaoImpl getUserVisitTimeDao() {
         return new UserVisitTimeDaoImpl();
     }
 

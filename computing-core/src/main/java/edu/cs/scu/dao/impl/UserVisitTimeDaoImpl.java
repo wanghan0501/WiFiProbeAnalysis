@@ -1,11 +1,12 @@
 package edu.cs.scu.dao.impl;
 
 import edu.cs.scu.bean.UserVisitTimeBean;
-import edu.cs.scu.conf.MybatisSqlSession;
-import edu.cs.scu.dao.UserVisitTimeDao;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.log4j.Logger;
+import edu.cs.scu.common.constants.AnalysisConstants;
+import edu.cs.scu.conf.JedisPoolManager;
+import edu.cs.scu.dao.BaseDao;
+import redis.clients.jedis.ShardedJedis;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,57 +14,47 @@ import java.util.List;
  * E-mail address is wanghan0501@vip.qq.com.
  * Copyright © 2017 Wang Han. SCU. All Rights Reserved.
  */
-public class UserVisitTimeDaoImpl implements UserVisitTimeDao {
-
-    // 得到log记录器
-    private static final Logger logger = Logger.getLogger(UserVisitTimeDaoImpl.class);
+public class UserVisitTimeDaoImpl extends BaseDao {
 
     @Override
-    public void addUserVisitTime(UserVisitTimeBean userVisitTimeBean) {
-        SqlSession sqlSession = MybatisSqlSession.getSqlSession();
+    public void add(List<Object> objectList) {
+        boolean isFirstVisit = true;
+        String key = null;
+        ShardedJedis jedis = JedisPoolManager.getResource();
+        List<String> times = new ArrayList<>();
 
-        try {
-            UserVisitTimeDao userVisitTimeDao = sqlSession.getMapper(UserVisitTimeDao.class);
-            userVisitTimeDao.addUserVisitTime(userVisitTimeBean);
-            sqlSession.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getStackTrace());
-        } finally {
-            sqlSession.close();
+        for (Object o : objectList) {
+            UserVisitTimeBean userVisitTimeBean = (UserVisitTimeBean) o;
+            if (isFirstVisit) {
+                key = String.valueOf(userVisitTimeBean.getShopId()) + "||"
+                    + userVisitTimeBean.getMac();
+                isFirstVisit = false;
+            }
+            times.add(String.valueOf(userVisitTimeBean.getVisitTime()));
         }
+        jedis.rpush(key, times.toArray(new String[0]));
+        jedis.close();
     }
 
     @Override
-    public void addUserVisitTimeByBatch(List<UserVisitTimeBean> userVisitTimeBeanList) {
-        SqlSession sqlSession = MybatisSqlSession.getSqlSession();
-
-        try {
-            UserVisitTimeDao userVisitTimeDao = sqlSession.getMapper(UserVisitTimeDao.class);
-            userVisitTimeDao.addUserVisitTimeByBatch(userVisitTimeBeanList);
-            sqlSession.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getStackTrace());
-        } finally {
-            sqlSession.close();
-        }
+    public Object get(String key) {
+        return null;
     }
 
     @Override
-    public long getFirstVisitTIme(int shopId, String mac) {
-        SqlSession sqlSession = MybatisSqlSession.getSqlSession();
-        long firstTime;
-        try {
-            UserVisitTimeDao userVisitTimeDao = sqlSession.getMapper(UserVisitTimeDao.class);
-            firstTime = userVisitTimeDao.getFirstVisitTIme(shopId, mac);
-        } catch (Exception e) {
-            firstTime = 0L;
-            logger.info("First Visit");
-        } finally {
-            sqlSession.close();
-        }
+    public List<Object> get(List<String> keys) {
+        return null;
+    }
 
-        return firstTime;
+    public long getFirstVisitTime(int shopId, String mac) {
+        ShardedJedis jedis = JedisPoolManager.getResource();
+        String key = shopId + "||" + mac;
+        String firstVisitTime = jedis.lindex(key, 0);
+        jedis.close();
+        if (firstVisitTime == null) {
+            return AnalysisConstants.DEFAULT_FIRST_VISIT_TIME;
+        } else {
+            return Long.valueOf(firstVisitTime);
+        }
     }
 }

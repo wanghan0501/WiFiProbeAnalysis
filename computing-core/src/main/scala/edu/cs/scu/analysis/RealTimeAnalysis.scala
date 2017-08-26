@@ -7,7 +7,7 @@ import edu.cs.scu.common.constants.AnalysisConstants
 import edu.cs.scu.common.types.TimeTypes
 import edu.cs.scu.dao.impl.{UserDaoImpl, UserVisitDaoImpl, UserVisitTimeDaoImpl}
 import edu.cs.scu.javautils.{DateUtil, MacAdressUtil}
-import edu.cs.scu.scalautils.DataUtil
+import edu.cs.scu.scalautils.AnalysisUtil
 import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streaming.dstream.DStream
@@ -70,9 +70,9 @@ object RealTimeAnalysis {
           // 深度访问人数,根据访问时间判断
           var deepVisitFlow: Int = 0
           // 用户访问时间列表
-          val userVisitTimeBeanArrayList: util.ArrayList[UserVisitTimeBean] = new util.ArrayList[UserVisitTimeBean]
+          val userVisitTimeBeanArrayList: util.List[Object] = new util.ArrayList()
           // 用户列表
-          val userBeanArrayList: util.ArrayList[UserBean] = new util.ArrayList[UserBean]()
+          val userBeanArrayList: util.List[Object] = new util.ArrayList()
           // 用户数据迭代器
           val datasIterator = datas.iterator
           while (datasIterator.hasNext) {
@@ -94,11 +94,11 @@ object RealTimeAnalysis {
             val tmac = currentData.getString(currentData.fieldIndex(AnalysisConstants.FIELD_TMAC))
 
             // 判断用户是否入店
-            if (DataUtil.isCheckIn(range, rssi)) {
+            if (AnalysisUtil.isCheckIn(range, rssi)) {
               checkInFlow = checkInFlow + 1
             }
 
-            if (DataUtil.isDeepVisit(1, mac, time)) {
+            if (AnalysisUtil.isDeepVisit(1, mac, time)) {
               deepVisitFlow = deepVisitFlow + 1
             }
 
@@ -119,20 +119,21 @@ object RealTimeAnalysis {
 
           // 插入用户数据
           val userDaoImpl = new UserDaoImpl
-          userDaoImpl.addUserByBatch(userBeanArrayList)
+          userDaoImpl.add(userBeanArrayList)
 
           // 插入用户访问时间数据
           val userVisitTimeDaoImpl = new UserVisitTimeDaoImpl
-          userVisitTimeDaoImpl.addUserVisitTimeByBatch(userVisitTimeBeanArrayList)
+          userVisitTimeDaoImpl.add(userVisitTimeBeanArrayList)
 
           // 进店率
-          val checkInRate = DataUtil.getCheckInRate(checkInFlow, totalFlow)
+          val checkInRate = AnalysisUtil.getCheckInRate(checkInFlow, totalFlow)
           // 深度访问率
-          val deepVisitRate = DataUtil.getDeepVisitRate(deepVisitFlow, checkInFlow)
+          val deepVisitRate = AnalysisUtil.getDeepVisitRate(deepVisitFlow, checkInFlow)
           // 浅访率
-          val shallowVisitRate = DataUtil.getShallowVisitRate(deepVisitFlow, checkInFlow)
+          val shallowVisitRate = AnalysisUtil.getShallowVisitRate(deepVisitFlow, checkInFlow)
           // 添加用户相关信息
           val userVisitDaoIml = new UserVisitDaoImpl
+          val userVisitList: util.List[Object] = new util.ArrayList[Object]()
           val userVisit = new UserVisitBean
           userVisit.setShopId(1)
           userVisit.setMmac(mmac)
@@ -142,7 +143,8 @@ object RealTimeAnalysis {
           userVisit.setCheckInRate(checkInRate)
           userVisit.setDeepVisitRate(deepVisitRate)
           userVisit.setShallowVisitRate(shallowVisitRate)
-          userVisitDaoIml.addUserVisit(userVisit)
+          userVisitList.add(userVisit)
+          userVisitDaoIml.add(userVisitList)
 
           println("insert finished")
         }

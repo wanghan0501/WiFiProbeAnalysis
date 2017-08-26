@@ -9,6 +9,10 @@ package edu.cs.scu.common.constants;
  */
 public interface TableConstants {
 
+    String TABLE_USER = "table_user";
+    String TABLE_USER_VISIT = "table_user_visit";
+    String TABLE_USER_VISIT_TIME = "table_user_visit_time";
+
     // table user_visit
     String FIELD_SHOP_ID = "shop_id";
     String FILED_MMAC = "mmac";
