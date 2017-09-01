@@ -145,8 +145,8 @@ object RealTimeAnalysis {
           userVisit.setShallowVisitRate(shallowVisitRate)
           userVisitList.add(userVisit)
           userVisitDaoIml.add(userVisitList)
-
           println("insert finished")
+
         }
         ) // end foreach
       }

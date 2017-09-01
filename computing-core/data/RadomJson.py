@@ -72,7 +72,7 @@ def random_json(item):
 
     probe = json.dumps(probe)
 
-    fileName = '/Users/mac/Workspace/Java/WIFIProbeAnalysis_Backstage/wifiProbe/source/A' + str(item)
+    fileName = './source/AA' + str(item)
     file = open(fileName, 'w')
     file.write(probe)
     file.close()

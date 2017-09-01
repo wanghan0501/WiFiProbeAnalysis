@@ -54,7 +54,6 @@ public class TaskDaoImpl implements TaskDao {
         } finally {
             sqlSession.close();
         }
-
         return taskBeanList;
     }
 
