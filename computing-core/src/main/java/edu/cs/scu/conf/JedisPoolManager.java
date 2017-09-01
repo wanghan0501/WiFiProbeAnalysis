@@ -41,7 +41,6 @@ public class JedisPoolManager {
         // 共享jedis池，用于集群
         List<JedisShardInfo> jedisShardInfos = new ArrayList<>();
         JedisShardInfo node01 = new JedisShardInfo("localhost", 6379);
-        node01.setPassword("110110");
         jedisShardInfos.add(node01);
         pool = new ShardedJedisPool(config, jedisShardInfos);
         isSetup = true;

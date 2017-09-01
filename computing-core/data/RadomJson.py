@@ -72,7 +72,7 @@ def random_json(item):
 
     probe = json.dumps(probe)
 
-    fileName = './source/AA' + str(item)
+    fileName = './source/A' + str(item)
     file = open(fileName, 'w')
     file.write(probe)
     file.close()

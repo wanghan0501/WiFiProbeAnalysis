@@ -27,7 +27,7 @@ public class UserDaoImpl extends BaseDao {
         Map<String, String> userTableMap = new HashMap<>();
         for (Object o : objectList) {
             UserBean userBean = (UserBean) o;
-            String Key = userBean.getMac() + "||" + String.valueOf(userBean.getShopId());
+            String Key = String.valueOf(userBean.getShopId()) + "||" + userBean.getMac();
             String value = JSON.toJSONString(userBean);
             userTableMap.put(Key, value);
         }
