@@ -61,6 +61,11 @@
             <version>${hadoop.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.cloudera.sparkts</groupId>
+            <artifactId>sparkts</artifactId>
+            <version>0.4.1</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
