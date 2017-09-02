@@ -32,4 +32,12 @@ public interface SparkConstants {
     String KAFKA_GROUP_ID = "kafka.group.id";
     String KAFKA_TOPICS = "kafka.topics";
     String KAFKA_NUMBER_PARTITIONS="kafka.number.partitions";
+
+    //HBase相关
+    String SPARK_ZOOKEEPER = "hbase.zookeeper.property.clientPort";
+    String SPARK_ZOOKEEPER_PORT = "2181";
+    String SPARK_ZOOKEEPER_QUORUM = "hbase.zookeeper.quorum";
+    String SPARK_ZOOKEEPER_QUORUM_IP = "120.24.238.195";
+    String GROUP_DATA_TABLE = "GroupData";
+    String SPARK_HBASE_CONF = "/usr/local/apps/hbase-1.3.0/conf/hbase-site.xml";
 }
