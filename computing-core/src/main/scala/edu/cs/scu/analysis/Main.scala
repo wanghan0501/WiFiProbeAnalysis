@@ -20,15 +20,17 @@ object Main {
     // 流环境
     val streamingContext: StreamingContext = InitUtil.getStreamingContext(spark.sparkContext)
 
-    //    val kafkaData = InitUtil.getDStreamFromKafka(streamingContext).map(_._2)
-    //    kafkaData.print()
-
-    // 获取原始数据
-    val originData = InitUtil.getDStream(streamingContext)
-    // 如果读入的数据不为空
-    if (originData != null) {
-      RealTimeAnalysis.analysis(spark, streamingContext, originData)
+    val kafkaData = InitUtil.getDStreamFromKafka(streamingContext).map(_._2)
+    kafkaData.print()
+    if (kafkaData != null) {
+      RealTimeAnalysis.analysis(spark, streamingContext, kafkaData)
     }
+    //    // 获取原始数据
+    //    val originData = InitUtil.getDStream(streamingContext)
+    //    // 如果读入的数据不为空
+    //    if (originData != null) {
+    //      RealTimeAnalysis.analysis(spark, streamingContext, originData)
+    //    }
     // 启动流环境
     streamingContext.start()
     streamingContext.awaitTermination()

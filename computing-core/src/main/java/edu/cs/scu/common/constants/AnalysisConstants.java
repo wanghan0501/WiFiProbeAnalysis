@@ -21,7 +21,7 @@ public interface AnalysisConstants {
     String FIELD_DS = "ds";
     String FIELD_ROUTER = "router";
     String FIELD_TC = "tc";
-    String FIELD_TMAC = "tmac";
+    String FIELD_TMC = "tmc";
     String FIELD_ARRD = "addr";
     String FIELD_LAT = "lat";
     String FIELD_LON = "lon";

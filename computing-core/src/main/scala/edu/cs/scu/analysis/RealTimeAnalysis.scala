@@ -91,7 +91,7 @@ object RealTimeAnalysis {
             // 是否与路由器相连
             val tc = currentData.getString(currentData.fieldIndex(AnalysisConstants.FIELD_TC))
             // 目标设备的mac地址，手机连接的WIFI的mac地址
-            val tmac = currentData.getString(currentData.fieldIndex(AnalysisConstants.FIELD_TMAC))
+            val tmc = currentData.getString(currentData.fieldIndex(AnalysisConstants.FIELD_TMC))
 
             // 判断用户是否入店
             if (AnalysisUtil.isCheckIn(range, rssi)) {
