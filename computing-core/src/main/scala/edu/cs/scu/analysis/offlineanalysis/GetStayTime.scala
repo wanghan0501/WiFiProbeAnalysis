@@ -1,4 +1,4 @@
-package edu.cs.scu.offLineAnalysis
+package edu.cs.scu.analysis.offlineanalysis
 
 import edu.cs.scu.dao.impl.UserDaoImpl
 

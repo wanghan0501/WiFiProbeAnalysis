@@ -1,16 +1,16 @@
 package edu.cs.scu.javautils;
 
 import com.alibaba.fastjson.JSON;
-import edu.cs.scu.bean.macDataBean;
+import edu.cs.scu.bean.MacDataBean;
 
 import java.util.List;
 
 public class ParseJson {
-    public static List<macDataBean> jsonToList(String json){
-        return JSON.parseArray(json, macDataBean.class);
+    public static List<MacDataBean> jsonToList(String json){
+        return JSON.parseArray(json, MacDataBean.class);
     }
 
-    public static macDataBean jsonToObject(String json){
-        return JSON.parseObject(json, macDataBean.class);
+    public static MacDataBean jsonToObject(String json){
+        return JSON.parseObject(json, MacDataBean.class);
     }
 }

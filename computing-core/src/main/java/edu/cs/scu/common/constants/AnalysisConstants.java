@@ -35,13 +35,13 @@ public interface AnalysisConstants {
     byte[] DATA_CF = "data".getBytes();
 
     byte[] lon = "lon".getBytes();
-    byte[]  lat = "lat".getBytes();
-    byte[]  mmac = "mmac".getBytes();
-    byte[]  probe_id = "probe_id".getBytes();
-    byte[]  rate = "rate".getBytes();
-    byte[]  wmac = "wmac".getBytes();
-    byte[]  dataList = "dataList".getBytes();
-    byte[]  wssid = "wssid".getBytes();
+    byte[] lat = "lat".getBytes();
+    byte[] mmac = "mmac".getBytes();
+    byte[] probe_id = "probe_id".getBytes();
+    byte[] rate = "rate".getBytes();
+    byte[] wmac = "wmac".getBytes();
+    byte[] dataList = "dataList".getBytes();
+    byte[] wssid = "wssid".getBytes();
     byte[] record_time = "record_time".getBytes();
-    byte[]  addr = "addr".getBytes();
+    byte[] addr = "addr".getBytes();
 }

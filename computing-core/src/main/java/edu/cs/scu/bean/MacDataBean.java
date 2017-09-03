@@ -1,5 +1,5 @@
 package edu.cs.scu.bean;
-public class macDataBean {
+public class MacDataBean {
     private String router;
     private Integer rssi;
     private Double range;
@@ -8,8 +8,8 @@ public class macDataBean {
     private String tc;
     private String ds;
 
-    public macDataBean(){}
-    public macDataBean(String router, Integer rssi, Double range, String tmc, String mac, String tc, String ds){
+    public MacDataBean(){}
+    public MacDataBean(String router, Integer rssi, Double range, String tmc, String mac, String tc, String ds){
         this.router = router;
         this.rssi = rssi;
         this.range = range;

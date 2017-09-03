@@ -1,4 +1,4 @@
-package edu.cs.scu.analysis
+package edu.cs.scu.analysis.realtimeanalysis
 
 import java.util
 

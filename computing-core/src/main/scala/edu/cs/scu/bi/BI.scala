@@ -15,9 +15,11 @@ import org.apache.spark.sql.{DataFrame, Row}
   *
   * @author Wang Han
   */
-object TimeSeries {
+object BI {
   def main(args: Array[String]): Unit = {
     val data = getData()
+
+
     val zone = ZoneId.systemDefault()
     var dtIndex: UniformDateTimeIndex = DateTimeIndex.uniformFromInterval(
       // start time
@@ -26,7 +28,6 @@ object TimeSeries {
       ZonedDateTime.of(2013, 1, 13, 0, 0, 0, 0, zone),
       // frequency
       new DayFrequency(1))
-
 
     val trainTsrdd = TimeSeriesRDD.timeSeriesRDDFromObservations(dtIndex, data,
       "time", "key", "value")

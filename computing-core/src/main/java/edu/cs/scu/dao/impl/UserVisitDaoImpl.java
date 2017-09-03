@@ -2,14 +2,13 @@ package edu.cs.scu.dao.impl;
 
 import com.alibaba.fastjson.JSON;
 import edu.cs.scu.bean.UserVisitBean;
+import edu.cs.scu.common.constants.TableConstants;
 import edu.cs.scu.conf.JedisPoolManager;
 import edu.cs.scu.dao.BaseDao;
 import redis.clients.jedis.ShardedJedis;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -22,24 +21,12 @@ public class UserVisitDaoImpl extends BaseDao {
     @Override
     public void add(List<Object> objectList) {
         ShardedJedis jedis = JedisPoolManager.getResource();
-        Map<String, List<String>> map = new HashMap<>();
+        List<String> values = new ArrayList<>();
         for (Object o : objectList) {
             UserVisitBean userVisitBean = (UserVisitBean) o;
-            String key = String.valueOf(userVisitBean.getShopId()) + "||"
-                + userVisitBean.getMmac();
-            if (map.containsKey(key)) {
-                List<String> values = map.get(key);
-                values.add(JSON.toJSONString(userVisitBean));
-                map.put(key, values);
-            } else {
-                List<String> values = new ArrayList<>();
-                values.add(JSON.toJSONString(userVisitBean));
-                map.put(key, values);
-            }
+            values.add(JSON.toJSONString(userVisitBean));
         }
-        for (Map.Entry<String, List<String>> entry : map.entrySet()) {
-            jedis.rpush(entry.getKey(), entry.getValue().toArray(new String[0]));
-        }
+        jedis.rpush(TableConstants.TABLE_USER_VISIT, values.toArray(new String[0]));
         jedis.close();
     }
 
