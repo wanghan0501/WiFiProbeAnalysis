@@ -43,6 +43,7 @@ object TimeSeries {
       .option("header", "true")
       .option("inferSchema", "false")
       .load("/Users/mac/Desktop/test.csv").rdd
+    println(Timestamp.valueOf(new Timestamp(1504408052000L).toLocalDateTime))
     val data = data1.map(t => {
       val time = t.getString(0)
       val dt = ZonedDateTime.of(time.substring(0, 4).toInt, time.substring(4, 6).toInt, time.substring(6, 8).toInt, 0, 0, 0, 0, ZoneId.systemDefault())
