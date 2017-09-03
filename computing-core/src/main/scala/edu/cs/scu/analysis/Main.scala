@@ -3,7 +3,8 @@ package edu.cs.scu.analysis
 import java.util.concurrent.{ExecutorService, Executors}
 
 import edu.cs.scu.common.constants.AnalysisConstants
-import edu.cs.scu.offLineAnalysis.{GetStayTime, OfflineMain}
+import edu.cs.scu.analysis.offlineanalysis.{GetStayTime, OfflineMain}
+import edu.cs.scu.analysis.realtimeanalysis.RealTimeAnalysis
 import edu.cs.scu.scalautils.InitUtil
 import org.apache.spark.streaming.StreamingContext
 

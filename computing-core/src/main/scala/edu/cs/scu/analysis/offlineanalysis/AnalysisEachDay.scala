@@ -1,4 +1,4 @@
-package edu.cs.scu.offLineAnalysis
+package edu.cs.scu.analysis.offlineanalysis
 
 import edu.cs.scu.common.constants.AnalysisConstants
 import edu.cs.scu.javautils.ParseJson

@@ -7,9 +7,8 @@ import edu.cs.scu.conf.JedisPoolManager;
 import edu.cs.scu.dao.BaseDao;
 import redis.clients.jedis.ShardedJedis;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -22,16 +21,12 @@ public class UserVisitDaoImpl extends BaseDao {
     @Override
     public void add(List<Object> objectList) {
         ShardedJedis jedis = JedisPoolManager.getResource();
-        Map<String, String> tableMap = new HashMap<>();
+        List<String> values = new ArrayList<>();
         for (Object o : objectList) {
             UserVisitBean userVisitBean = (UserVisitBean) o;
-            String Key = String.valueOf(userVisitBean.getShopId()) + "||"
-                + userVisitBean.getMmac() + "||"
-                + String.valueOf(userVisitBean.getTime());
-            String value = JSON.toJSONString(userVisitBean);
-            tableMap.put(Key, value);
+            values.add(JSON.toJSONString(userVisitBean));
         }
-        jedis.hmset(TableConstants.TABLE_USER_VISIT, tableMap);
+        jedis.rpush(TableConstants.TABLE_USER_VISIT, values.toArray(new String[0]));
         jedis.close();
     }
 
