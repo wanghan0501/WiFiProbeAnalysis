@@ -23,15 +23,15 @@ object Main {
     val spark = InitUtil.initSparkSession()
     // 流环境
     val streamingContext: StreamingContext = InitUtil.getStreamingContext(spark.sparkContext)
-    //    val kafkaData = InitUtil.getDStreamFromKafka(streamingContext).map(_._2)
-    //    kafkaData.print()
-//    val threadPool: ExecutorService = Executors.newFixedThreadPool(AnalysisConstants.THREADS_NUM)
-//    try{
-//      threadPool.execute(new GetStayTime)
-//      threadPool.execute(new OfflineMain)
-//    }finally {
-//      threadPool.shutdown()
-//    }
+//        val kafkaData = InitUtil.getDStreamFromKafka(streamingContext).map(_._2)
+//        kafkaData.print()
+    val threadPool: ExecutorService = Executors.newFixedThreadPool(AnalysisConstants.THREADS_NUM)
+    try{
+      threadPool.execute(new GetStayTime)
+      threadPool.execute(new OfflineMain)
+    }finally {
+      threadPool.shutdown()
+    }
     // 获取原始数据
     val originData = InitUtil.getDStream(streamingContext)
     // 如果读入的数据不为空

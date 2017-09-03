@@ -11,7 +11,7 @@ import org.apache.hadoop.hbase.mapreduce.{TableInputFormat, TableMapReduceUtil}
 class OfflineMain extends Runnable{
   override def run(): Unit = {
     while(true){
-      //OfflineMainFunc()
+      OfflineMainFunc()
       Thread.sleep(60000)
     }
   }
