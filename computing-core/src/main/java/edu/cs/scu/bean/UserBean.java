@@ -17,6 +17,11 @@ public class UserBean implements Serializable{
     private String mac;
     // 手机品牌
     private String brand;
+    //停留时间
+    private Long stayTime;
+
+    //来访周期
+    private Long visitCycle;
 
     public static long getSerialVersinUID() {
         return serialVersinUID;
@@ -46,4 +51,19 @@ public class UserBean implements Serializable{
         this.brand = brand;
     }
 
+    public Long getStayTime() {
+        return stayTime;
+    }
+
+    public void setStayTime(Long stayTime) {
+        this.stayTime = stayTime;
+    }
+
+    public Long getVisitCycle() {
+        return visitCycle;
+    }
+
+    public void setVisitCycle(Long visitCycle) {
+        this.visitCycle = visitCycle;
+    }
 }

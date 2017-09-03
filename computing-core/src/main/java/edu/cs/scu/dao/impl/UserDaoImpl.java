@@ -56,4 +56,35 @@ public class UserDaoImpl extends BaseDao {
         jedis.close();
         return userBeanList;
     }
+
+    //更新所有驻留时长
+    public void updateStayTime() {
+        ShardedJedis jedis = JedisPoolManager.getResource();
+        Map<String, String> map = jedis.hgetAll(TableConstants.TABLE_USER);
+        if(map.size() > 0) {
+            List<Object> userBeanList = new ArrayList<>();
+            for (Map.Entry<String, String> user : map.entrySet()) {
+                String firstVisitTime = jedis.lindex(user.getKey(), 0);
+                Long len = jedis.llen(user.getKey());
+                String LastVisitTime = "";
+                Long stayTime = 0L;
+                if (len > 1) {
+                    LastVisitTime = jedis.lindex(user.getKey(), len - 1);
+                    stayTime = Long.valueOf(LastVisitTime) - Long.valueOf(firstVisitTime);
+                } else {
+                    stayTime = 3L;
+                }
+                Long visitCycle = 0L;
+                UserBean userBean = JSON.parseObject(user.getValue(), UserBean.class);
+                userBean.setStayTime(stayTime);
+                userBean.setVisitCycle(visitCycle);
+                userBeanList.add(userBean);
+            }
+            System.out.println("insert ....");
+            this.add(userBeanList);
+        }
+        System.out.println("nothing insert ....");
+        jedis.close();
+    }
 }
+
