@@ -26,6 +26,9 @@
 # csv files
 **/*.csv
 
+# maven package files
+**/dependency-reduced-pom.xml 
+
 # property files
 **/*.properties
 
