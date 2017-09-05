@@ -25,6 +25,16 @@ object Main {
     // 流环境
     val streamingContext: StreamingContext = InitUtil.getStreamingContext(spark.sparkContext)
 
+<<<<<<< HEAD
+    val kafkaData = InitUtil.getDStreamFromKafka(streamingContext).map(_._2)
+    kafkaData.print()
+    if (kafkaData != null) {
+      RealTimeAnalysis.analysis(spark, streamingContext, kafkaData)
+
+    //    val kafkaData = InitUtil.getDStreamFromKafka(streamingContext).map(_._2)
+    //    kafkaData.print()
+=======
+>>>>>>> 5ffd3c388e1a1bb8b965aed0c7d02196394e61e7
     val threadPool: ExecutorService = Executors.newFixedThreadPool(AnalysisConstants.THREADS_NUM)
     try {
       threadPool.execute(new GetStayTime)
@@ -39,7 +49,10 @@ object Main {
       kafkaData.print()
       RealTimeAnalysis.analysis(spark, streamingContext, kafkaData)
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 5ffd3c388e1a1bb8b965aed0c7d02196394e61e7
     //    // 获取原始数据
     //    val originData = InitUtil.getDStream(streamingContext)
     //    // 如果读入的数据不为空
@@ -51,4 +64,4 @@ object Main {
     streamingContext.awaitTermination()
 
   }
-}
+}}
