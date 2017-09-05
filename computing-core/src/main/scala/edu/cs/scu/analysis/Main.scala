@@ -28,7 +28,7 @@ object Main {
     val threadPool: ExecutorService = Executors.newFixedThreadPool(AnalysisConstants.THREADS_NUM)
     try {
       threadPool.execute(new GetStayTime)
-      threadPool.execute(new OfflineMain)
+      //threadPool.execute(new OfflineMain)
     } finally {
       threadPool.shutdown()
     }
@@ -36,6 +36,7 @@ object Main {
     val kafkaData = InitUtil.getDStreamFromKafka(streamingContext).map(_._2)
     // 如果读入的数据不为空
     if (kafkaData != null) {
+      kafkaData.print()
       RealTimeAnalysis.analysis(spark, streamingContext, kafkaData)
     }
 

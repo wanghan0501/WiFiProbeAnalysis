@@ -1,0 +1,9 @@
+#hbaseIp=hdfs://localhost:60000
+#hbaseDir=hdfs://localhost:9000//hbase
+#zookeeperIp=localhost
+#zookeeperPort=2181
+
+hbaseIp=hdfs://120.24.238.195:60000
+hbaseDir=hdfs://120.24.238.195:9000//hbase
+zookeeperIp=120.24.238.195
+zookeeperPort=2181
