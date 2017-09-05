@@ -40,9 +40,10 @@ public class JedisPoolManager {
         JedisPoolConfig config = new JedisPoolConfig();//Jedis池配置
         // 共享jedis池，用于集群
         List<JedisShardInfo> jedisShardInfos = new ArrayList<>();
-        JedisShardInfo node01 = new JedisShardInfo("localhost", 6379);
+        JedisShardInfo node01 = new JedisShardInfo("120.24.238.195", 6379);
 //        JedisShardInfo node02 = new JedisShardInfo("120.25.162.32", 6379);
 //        JedisShardInfo node03 = new JedisShardInfo("112.74.114.226", 6379);
+        node01.setPassword("110110");
         jedisShardInfos.add(node01);
 //        jedisShardInfos.add(node02);
 //        jedisShardInfos.add(node03);

@@ -21,13 +21,13 @@ public interface AnalysisConstants {
     String FIELD_DS = "ds";
     String FIELD_ROUTER = "router";
     String FIELD_TC = "tc";
-    String FIELD_TMAC = "tmac";
+    String FIELD_TMC = "tmc";
     String FIELD_ARRD = "addr";
     String FIELD_LAT = "lat";
     String FIELD_LON = "lon";
 
     long DEFAULT_FIRST_VISIT_TIME = 0L;
-    Integer THREADS_NUM = 2;
+    Integer THREADS_NUM = 1;
 
     //HBase 常量
     byte[] ADDRESS_CF = "Address".getBytes();

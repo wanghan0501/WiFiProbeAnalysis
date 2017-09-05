@@ -24,10 +24,10 @@ object AnalysisEachDay {
       val wmac = Bytes.toString(result.getValue(AnalysisConstants.PROBEINFO_CF, AnalysisConstants.wssid))
       val addr = Bytes.toString(result.getValue(AnalysisConstants.ADDRESS_CF, AnalysisConstants.addr))
       val dataIterator = macList.iterator()
-      while(dataIterator.hasNext){
-        print(dataIterator.next().getMac)
+      while (dataIterator.hasNext) {
+        //print(dataIterator.next().getMac)
       }
-      println("RDDCOUNT:" + count)
+      //println("RDDCOUNT:" + count)
     }
     }
 

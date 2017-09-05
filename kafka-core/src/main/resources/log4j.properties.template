@@ -1,0 +1,32 @@
+log4j.rootLogger=INFO,CONSOLE
+log4j.addivity.org.apache=false
+
+log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender
+log4j.appender.CONSOLE.Threshold=INFO
+log4j.appender.CONSOLE.layout.ConversionPattern=%d{yyyy-MM-dd HH\:mm\:ss} -%-4r [%t] %-5p  %x - %m%n
+log4j.appender.CONSOLE.Target=System.out
+log4j.appender.CONSOLE.Encoding=UTF-8
+log4j.appender.CONSOLE.layout=org.apache.log4j.PatternLayout
+
+log4j.logger.com.alibaba.dubbo=error
+log4j.logger.org.springframework=error
+log4j.logger.org.apache.zookeeper=error
+log4j.logger.org.I0Itec.zkclient=error
+
+log4j.logger.kafkaProducer=INFO,kafkalogProducer
+log4j.appender.kafkalogProducer=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.kafkalogProducer.File=${catalina.home}/logs/kafkaProducer.log
+log4j.appender.kafkalogProducer.DatePattern=yyyy-MM-dd'.log'
+log4j.appender.kafkalogProducer.Encoding=UTF-8
+log4j.appender.kafkalogProducer.layout=org.apache.log4j.PatternLayout
+log4j.appender.kafkalogProducer.layout.ConversionPattern=[LD_sys]  %d{yyyy-MM-dd HH\:mm\:ss} %5p %c{1}\:%L \: %m%n
+
+log4j.logger.kafkaConsumer=INFO,kafkalogConsumer
+log4j.appender.kafkalogConsumer=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.kafkalogConsumer.File=${catalina.home}/logs/kafkaConsumer.log
+log4j.appender.kafkalogConsumer.DatePattern=yyyy-MM-dd'.log'
+log4j.appender.kafkalogConsumer.Encoding=UTF-8
+log4j.appender.kafkalogConsumer.layout=org.apache.log4j.PatternLayout
+log4j.appender.kafkalogConsumer.layout.ConversionPattern=[LD_sys]  %d{yyyy-MM-dd HH\:mm\:ss} %5p %c{1}\:%L \: %m%n\=\=\=\=\=\=\=
+
+
