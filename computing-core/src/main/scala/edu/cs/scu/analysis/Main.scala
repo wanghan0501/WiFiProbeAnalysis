@@ -51,4 +51,4 @@ object Main {
     streamingContext.awaitTermination()
 
   }
-}}
+}
