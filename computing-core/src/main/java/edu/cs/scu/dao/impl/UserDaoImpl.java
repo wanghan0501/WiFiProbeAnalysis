@@ -5,6 +5,7 @@ import edu.cs.scu.bean.UserBean;
 import edu.cs.scu.common.constants.TableConstants;
 import edu.cs.scu.conf.JedisPoolManager;
 import edu.cs.scu.dao.BaseDao;
+import edu.cs.scu.javautils.DateUtil;
 import redis.clients.jedis.ShardedJedis;
 
 import java.util.ArrayList;
@@ -64,18 +65,21 @@ public class UserDaoImpl extends BaseDao {
         if(map.size() > 0) {
             List<Object> userBeanList = new ArrayList<>();
             for (Map.Entry<String, String> user : map.entrySet()) {
+                UserBean userBean = JSON.parseObject(user.getValue(), UserBean.class);
                 String firstVisitTime = jedis.lindex(user.getKey(), 0);
+                userBean.setFirst_time(DateUtil.stampToDate(firstVisitTime));
                 Long len = jedis.llen(user.getKey());
                 String LastVisitTime = "";
                 Long stayTime = 0L;
                 if (len > 1) {
                     LastVisitTime = jedis.lindex(user.getKey(), len - 1);
-                    stayTime = Long.valueOf(LastVisitTime) - Long.valueOf(firstVisitTime);
+                    stayTime = Long.valueOf(LastVisitTime) - Long.valueOf(firstVisitTime) + 3;
+                    userBean.setRecent_time(DateUtil.stampToDate(LastVisitTime));
                 } else {
                     stayTime = 3L;
+                    userBean.setRecent_time("-");
                 }
                 Long visitCycle = 0L;
-                UserBean userBean = JSON.parseObject(user.getValue(), UserBean.class);
                 userBean.setStayTime(stayTime);
                 userBean.setVisitCycle(visitCycle);
                 userBeanList.add(userBean);

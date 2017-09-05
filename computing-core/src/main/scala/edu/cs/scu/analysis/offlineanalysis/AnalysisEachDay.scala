@@ -17,7 +17,6 @@ object AnalysisEachDay {
       //println(result)
       val dataList = Bytes.toString(result.getValue(AnalysisConstants.DATA_CF, AnalysisConstants.dataList))
       val macList = ParseJson.jsonToList(dataList)
-      //println(macList)
       val probeId = Bytes.toString(result.getValue(AnalysisConstants.PROBEINFO_CF, AnalysisConstants.probe_id))
       val mmac = Bytes.toString(result.getValue(AnalysisConstants.PROBEINFO_CF, AnalysisConstants.mmac))
       val rate = Bytes.toString(result.getValue(AnalysisConstants.PROBEINFO_CF, AnalysisConstants.rate))
@@ -26,7 +25,7 @@ object AnalysisEachDay {
       val addr = Bytes.toString(result.getValue(AnalysisConstants.ADDRESS_CF, AnalysisConstants.addr))
       val dataIterator = macList.iterator()
       while (dataIterator.hasNext) {
-        print(dataIterator.next().getMac)
+        //print(dataIterator.next().getMac)
       }
       //println("RDDCOUNT:" + count)
     }

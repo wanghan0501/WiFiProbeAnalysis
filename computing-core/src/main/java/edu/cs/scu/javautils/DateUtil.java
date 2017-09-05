@@ -59,6 +59,15 @@ public class DateUtil {
         return 0L;
     }
 
+    public static String stampToDate(String s){
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long lt = new Long(s);
+        Date date = new Date(lt);
+        res = simpleDateFormat.format(date);
+        return res;
+    }
+
 
     /**
      * 判断第二个时间是否在第一个时间之后
