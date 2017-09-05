@@ -80,9 +80,10 @@ public class UserDaoImpl extends BaseDao {
                 userBean.setVisitCycle(visitCycle);
                 userBeanList.add(userBean);
             }
-            if (userBeanList.size() > 0)
-                this.add(userBeanList);
+            System.out.println("insert ....");
+            this.add(userBeanList);
         }
+        System.out.println("nothing insert ....");
         jedis.close();
     }
 }

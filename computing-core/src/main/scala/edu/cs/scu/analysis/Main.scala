@@ -2,8 +2,9 @@ package edu.cs.scu.analysis
 
 import java.util.concurrent.{ExecutorService, Executors}
 
+import edu.cs.scu.analysis.offlineanalysis.{GetStayTime, OfflineMain}
+import edu.cs.scu.analysis.realtimeanalysis.RealTimeAnalysis
 import edu.cs.scu.common.constants.AnalysisConstants
-import edu.cs.scu.offLineAnalysis.GetStayTime
 import edu.cs.scu.scalautils.InitUtil
 import org.apache.spark.streaming.StreamingContext
 
@@ -24,6 +25,7 @@ object Main {
     // 流环境
     val streamingContext: StreamingContext = InitUtil.getStreamingContext(spark.sparkContext)
 
+<<<<<<< HEAD
     val kafkaData = InitUtil.getDStreamFromKafka(streamingContext).map(_._2)
     kafkaData.print()
     if (kafkaData != null) {
@@ -31,18 +33,25 @@ object Main {
 
     //    val kafkaData = InitUtil.getDStreamFromKafka(streamingContext).map(_._2)
     //    kafkaData.print()
+=======
+>>>>>>> 5ffd3c388e1a1bb8b965aed0c7d02196394e61e7
     val threadPool: ExecutorService = Executors.newFixedThreadPool(AnalysisConstants.THREADS_NUM)
-    try{
+    try {
       threadPool.execute(new GetStayTime)
-    }finally {
+      threadPool.execute(new OfflineMain)
+    } finally {
       threadPool.shutdown()
     }
-    // 获取原始数据
-    val originData = InitUtil.getDStream(streamingContext)
+
+    val kafkaData = InitUtil.getDStreamFromKafka(streamingContext).map(_._2)
     // 如果读入的数据不为空
-    if (originData != null) {
-      RealTimeAnalysis.analysis(spark, streamingContext, originData)
+    if (kafkaData != null) {
+      RealTimeAnalysis.analysis(spark, streamingContext, kafkaData)
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5ffd3c388e1a1bb8b965aed0c7d02196394e61e7
     //    // 获取原始数据
     //    val originData = InitUtil.getDStream(streamingContext)
     //    // 如果读入的数据不为空
