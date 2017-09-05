@@ -96,12 +96,10 @@ object RealTimeAnalysis {
             // 判断用户是否入店
             if (AnalysisUtil.isCheckIn(range, rssi)) {
               checkInFlow = checkInFlow + 1
+              if (AnalysisUtil.isDeepVisit(1, mac, time)) {
+                deepVisitFlow = deepVisitFlow + 1
+              }
             }
-
-            if (AnalysisUtil.isDeepVisit(1, mac, time)) {
-              deepVisitFlow = deepVisitFlow + 1
-            }
-
             // 向用户列表中加入新数据
             val userBean = new UserBean
             userBean.setShopId(1)

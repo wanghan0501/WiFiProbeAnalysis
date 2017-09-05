@@ -6,7 +6,6 @@ import edu.cs.scu.conf.JedisPoolManager;
 import edu.cs.scu.dao.BaseDao;
 import redis.clients.jedis.ShardedJedis;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,21 +17,16 @@ public class UserVisitTimeDaoImpl extends BaseDao {
 
     @Override
     public void add(List<Object> objectList) {
-        boolean isFirstVisit = true;
         String key = null;
         ShardedJedis jedis = JedisPoolManager.getResource();
-        List<String> times = new ArrayList<>();
 
         for (Object o : objectList) {
             UserVisitTimeBean userVisitTimeBean = (UserVisitTimeBean) o;
-            if (isFirstVisit) {
-                key = String.valueOf(userVisitTimeBean.getShopId()) + "||"
-                    + userVisitTimeBean.getMac();
-                isFirstVisit = false;
-            }
-            times.add(String.valueOf(userVisitTimeBean.getVisitTime()));
+            key = String.valueOf(userVisitTimeBean.getShopId()) + "||"
+                + userVisitTimeBean.getMac();
+            jedis.rpush(key, String.valueOf(userVisitTimeBean.getVisitTime()));
         }
-        jedis.rpush(key, times.toArray(new String[0]));
+
         jedis.close();
     }
 

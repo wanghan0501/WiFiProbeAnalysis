@@ -69,7 +69,7 @@ public class DateUtil {
      * @return
      */
     public static boolean after(long time1, long time2, long intervalMillisecond) {
-        if (time2 - time1 >= intervalMillisecond) {
+        if (time2 - time1 > intervalMillisecond) {
             return true;
         } else {
             return false;

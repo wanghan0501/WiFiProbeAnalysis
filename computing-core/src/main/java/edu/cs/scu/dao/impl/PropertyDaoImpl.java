@@ -26,8 +26,8 @@ public class PropertyDaoImpl implements PropertyDao {
             PropertyDao propertyDao = sqlSession.getMapper(PropertyDao.class);
             propertyBean = propertyDao.getPropertyById(id);
         } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getStackTrace());
+//            e.printStackTrace();
+//            logger.error(e.getStackTrace());
         } finally {
             sqlSession.close();
         }
@@ -43,8 +43,8 @@ public class PropertyDaoImpl implements PropertyDao {
             PropertyDao propertyDao = sqlSession.getMapper(PropertyDao.class);
             propertyBean = propertyDao.getNewProperty();
         } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getStackTrace());
+//            e.printStackTrace();
+//            logger.error(e.getStackTrace());
         } finally {
             sqlSession.close();
         }
@@ -60,8 +60,8 @@ public class PropertyDaoImpl implements PropertyDao {
             propertyDao.setyPropertyNotUse(propertyBean);
             sqlSession.commit();
         } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getStackTrace());
+//            e.printStackTrace();
+//            logger.error(e.getStackTrace());
         } finally {
             sqlSession.close();
         }
@@ -75,8 +75,8 @@ public class PropertyDaoImpl implements PropertyDao {
             propertyDao.setPropertyUse(propertyBean);
             sqlSession.commit();
         } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getStackTrace());
+//            e.printStackTrace();
+//            logger.error(e.getStackTrace());
         } finally {
             sqlSession.close();
         }
@@ -90,8 +90,8 @@ public class PropertyDaoImpl implements PropertyDao {
             PropertyDao propertyDao = sqlSession.getMapper(PropertyDao.class);
             isUse = propertyDao.isUse(shopId, mmac);
         } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getStackTrace());
+//            e.printStackTrace();
+//            logger.error(e.getStackTrace());
         } finally {
             sqlSession.close();
         }

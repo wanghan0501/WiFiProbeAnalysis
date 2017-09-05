@@ -15,8 +15,8 @@
 
 ```bash
 $SPARK_HOME/bin/spark-submit \
---class edu.cs.scu.analysis.Main \
 --master spark://node-01:7077 \
+--class edu.cs.scu.analysis.Main \
 --executor-memory 500M \
 --executor-cores 1 \
 ./computing-core-0.0.1.jar
