@@ -76,7 +76,7 @@ public class UserDaoImpl extends BaseDao {
                     stayTime = Long.valueOf(LastVisitTime) - Long.valueOf(firstVisitTime) + 3;
                     userBean.setRecent_time(DateUtil.stampToDate(LastVisitTime));
                 } else {
-                    stayTime = 3L;
+                    stayTime = 3000L;
                     userBean.setRecent_time("-");
                 }
                 Long visitCycle = 0L;

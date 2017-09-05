@@ -59,8 +59,8 @@ public class MacAdressUtil {
             macPrefix = macAddress.substring(0, 8).toUpperCase();
         } catch (Exception e) {
             macPrefix = null;
-            logger.error(e.getStackTrace());
-            System.err.println(e.getStackTrace());
+//            logger.error(e.getStackTrace());
+//            System.err.println(e.getStackTrace());
         }
         return macPrefix;
     }
@@ -78,8 +78,8 @@ public class MacAdressUtil {
             VendorMacBean vendorMacBean = vendorMacDaoImpl.getVendorByMac(macPrefix);
             return vendorMacBean.getVendorName();
         } catch (Exception e) {
-            logger.error(e.getStackTrace());
-            System.err.println(e.getStackTrace());
+//            logger.error(e.getStackTrace());
+//            System.err.println(e.getStackTrace());
         }
         return null;
     }
