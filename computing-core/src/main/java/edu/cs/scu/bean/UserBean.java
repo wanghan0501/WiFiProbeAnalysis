@@ -19,9 +19,12 @@ public class UserBean implements Serializable{
     private String brand;
     //停留时间
     private Long stayTime;
-
     //来访周期
     private Long visitCycle;
+
+    private String first_time;
+
+    private String recent_time;
 
     public static long getSerialVersinUID() {
         return serialVersinUID;
@@ -65,5 +68,22 @@ public class UserBean implements Serializable{
 
     public void setVisitCycle(Long visitCycle) {
         this.visitCycle = visitCycle;
+    }
+
+
+    public String getRecent_time() {
+        return recent_time;
+    }
+
+    public void setRecent_time(String recent_time) {
+        this.recent_time = recent_time;
+    }
+
+    public String getFirst_time() {
+        return first_time;
+    }
+
+    public void setFirst_time(String first_time) {
+        this.first_time = first_time;
     }
 }
