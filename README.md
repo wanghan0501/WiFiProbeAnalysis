@@ -67,4 +67,3 @@ HBase Client | 操作HBase
  > 非关系型数据库，适用于存储快速读写的数据，用于存储分析结果，存储格式为json
  
  
-## Rest-API
