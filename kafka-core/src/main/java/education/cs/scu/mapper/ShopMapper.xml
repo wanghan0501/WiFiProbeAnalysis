@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="education.cs.scu.mapper.ShopMapper">
+
+    <resultMap id="shopInfos" type="ShopInfo">
+        <result column="shop_id" property="shop_id"/>
+        <result column="shop_name" property="shop_name"/>
+        <result column="shop_addr" property="shop_addr"/>
+        <result column="shop_manager" property="shop_manager"/>
+        <result column="shop_telephone" property="shop_telephone"/>
+        <result column="shop_describe" property="shop_describe"/>
+        <result column="shop_owner" property="shop_owner"/>
+    </resultMap>
+
+    <resultMap id="probeInfos" type="ProbeInfo">
+        <result column="shop_id" property="shop_id"/>
+        <result column="mmac" property="mmac"/>
+        <result column="lat" property="lat"/>
+        <result column="lon" property="lon"/>
+        <result column="addr" property="addr"/>
+        <result column="state" property="state"/>
+        <result column="total_data" property="total_data"/>
+        <result column="shop_name" property="shop_name"/>
+        <result column="rate" property="rate"/>
+        <result column="user_name" property="user_name"/>
+    </resultMap>
+
+    <insert id="addShopInfo" parameterType="ShopInfo">
+            INSERT INTO shop_info(shop_name, shop_addr, shop_manager,shop_owner, shop_telephone, shop_describe)
+            VALUES ( #{shop_name}, #{shop_addr}, #{shop_manager},#{shop_owner},#{shop_telephone}, #{shop_describe});
+        </insert>
+    <select id="queryShopInfos" parameterType="ShopInfo" resultMap="shopInfos">
+            SELECT * FROM shop_info
+            WHERE shop_owner = #{shop_owner}
+        </select>
+
+
+    <select id="queryShopNameById" parameterType="ShopInfo" resultMap="shopInfos">
+        SELECT * FROM shop_info
+        WHERE shop_id = #{shop_id}
+    </select>
+    <update id="updateShopInfo" parameterType="ShopInfo">
+            UPDATE shop_info
+            SET shop_name=#{shop_name}, shop_addr = #{shop_addr}, shop_manager = #{shop_manager},
+            shop_owner = #{shop_owner},shop_telephone = #{shop_telephone},
+            shop_describe = #{shop_describe}
+            WHERE shop_id = #{shop_id}
+        </update>
+
+    <insert id="addProbeInfo" parameterType="ProbeInfo">
+        INSERT INTO  probe(shop_id,mmac,lat,lon,addr,state,total_data,shop_name,rate,user_name)
+        VALUES (#{shop_id},#{mmac},#{lat},#{lon},#{addr},#{state},#{total_data},#{shop_name},#{rate},#{user_name});
+    </insert>
+    <select id="queryProbeInfos" parameterType="ProbeInfo" resultMap="probeInfos">
+            SELECT *
+            FROM probe
+            WHERE user_name = #{user_name}
+        </select>
+    <select id="queryShopProbeInfo" parameterType="ShopInfo" resultMap="probeInfos">
+            SELECT *
+            FROM probe
+            WHERE probe.shop_id = #{shop_id};
+    </select>
+</mapper>

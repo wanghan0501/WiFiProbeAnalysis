@@ -1,73 +1,31 @@
-# Kafka-Core
+# spring_mvc_mybatis_maven-
+基于maven的java web项目框架模板，使用spring_mvc + mybatis框架
+可用于在IDEA上快速构建web项目
 
-基于WIFI探针的商业大数据分析技术(数据缓存后端)
+更多 spring_mvc教程demo:
+https://github.com/Maicius/Spring_course
 
-简介：
-本程序是WIFI探针商业大数据分析的数据缓存服务器部分，主要功能为格式化探针上传的数据，将
-格式化后的数据下发至分布式订阅系统kafka用于分布式集群的在线分析，同时也将数据缓存到数据
-仓库Hive中，用于离线分析，机器学习等。
+#测试方法：
+将test.sql中sql语句复制到mysql中，
+建立数据库，并修改db.properties里数据库相关属性（账户名和密码）
+build -> run,正常显示网页
+输入数据库中到账户和密码，
+登陆跳转后显示用户名
+测试完成
 
-项目目录结构：
+#一些可能到错误（针对mac）：
+###1.pom.xml里某些包出现无法找到对应版本
+解决方法：update maven
+###2.maven成功引入所有的包，但报 class not found之类但错误 
+原因：包损坏（可能是下载过程中突然断网引起的）
+解决方法：进入 .m2 目录删除repository，重新下载所有的包
+###3.maven更新和下载速度过慢
+解决方法：将中心仓库的镜像替换为阿里云镜像,打开 .m2 目录下setting.xml，
+将<mirror></mirror>替换为下面内容：
 
-|________________________________________________________  
-com.cs.scu   
-|  
-|--controller  
-|  
-|--entity  
-|  
-|--hbase  
-|  
-|--kafka  
-|   |  
-|   |--consumer  
-|   |  
-|   |--producer  
-|  
-|--mapper  
-|  
-|--service  
-|   |  
-|   |-impl  
-|  
-|--tools  
-|________________________________________________________  
-
-
-核心类：
-
-数据上传接口
-edu.cs.scu.controller.DataUploadController
-
-Json数据处理实体类
-edu.cs.scu.entity.Data
-edu.cs.scu.entity.DataGroup
-
-Hive数据仓库工具类
-edu.cs.scu.hive.HBaseService
-
-Kafka分布式消息订阅系统消费者
-edu.cs.scu.kafka.consumer.KafkaConsumerForHive
-edu.cs.scu.kafka.consumer.KafkaConsumers
-
-Kafka分布式消息订阅系统生产者
-edu.cs.scu.kafka.producer.KafkaProducerForHive
-edu.cs.scu.kafka.producer.KafkaProducers
-edu.cs.scu.kafka.producer.KafkaMesConstant
-
-工具类
-edu.cs.scu.tools.Util
-
-
-
-主要算法流程：
-
-数据上传接口接受到探针上报数据后，将上传的json数据进行格式化处理（包括转码，
-补缺缺失字段（探针没有探测到的数据字段会默认无，此目的是为了节省流量））。然后通过
-调用Kafka消息生产者send()函数，将数据push到消息队列中。
-系统会通过调用工具类Util中的hiveTask()函数执行计划任务，启动kafka消费者，将原始
-数据存入hive中。此外集群可以通过调用此消费者，或者自己实现消费者消费消息队列中的数据。
-
-
->[赛题链接](http://www.cnsoftbei.com/bencandy.php?fid=148&aid=1515)
-
+    <mirror>
+      <id>alimaven</id>
+      <name>aliyun maven</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>

@@ -5,6 +5,6 @@
 <configuration>
 
     <typeAliases>
-        <package name="edu.cs.scu.entity"/>
+        <package name="education.cs.scu.entity"/>
     </typeAliases>
 </configuration>
