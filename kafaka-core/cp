@@ -1,0 +1,1 @@
+cp /home/maicius/wake.war /usr/tomcat/apache-tomcat-8.5.8/webapps/

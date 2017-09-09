@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="education.cs.scu.mapper.PropertyMapper">
+    <resultMap id="propertyMap" type="PropertyBean">
+        <result column="property_id" property="propertyId"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="mmac" property="mmac"/>
+        <result column="visit_cycle" property="visitCycle"/>
+        <result column="visit_range" property="visitRange"/>
+        <result column="visit_rssi" property="visitRSSI"/>
+        <result column="activity_degree" property="activityDegree"/>
+        <result column="visit_time_split" property="visitTimeSplit"/>
+        <result column="property_type" property="propertyType"/>
+    </resultMap>
+    <update id="setProperty" parameterType="PropertyBean">
+        UPDATE property
+        SET shop_id = #{shopId}, mmac = #{mmac}, visit_cycle = #{visitCycle},
+        visit_range = #{visitRange}, visit_rssi = #{visitRSSI},
+        activity_degree = #{activityDegree}, visit_time_split = #{visitTimeSplit},
+        property_type = #{propertyType}
+        WHERE property_id = #{propertyId}
+    </update>
+
+    <insert id="addProperty" parameterType="PropertyBean">
+        INSERT INTO property(shop_id, mmac, visit_cycle, visit_range, visit_rssi, activity_degree,
+        visit_time_split, property_type)
+        VALUES (#{shopId}, #{mmac}, #{visitCycle}, #{visitRange}, #{visitRSSI},
+        #{activityDegree}, #{visitTimeSplit}, #{propertyType})
+    </insert>
+
+    <select id="queryProperty" parameterType="PropertyBean" resultMap="propertyMap">
+        SELECT * FROM property
+        WHERE shop_id = #{shopId}
+        AND mmac = #{mmac}
+    </select>
+</mapper>
