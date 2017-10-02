@@ -2,6 +2,9 @@
 > WIFI探针是一种可以记录附近mac地址的嗅探器，可以根据收集到的mac地址进行数据分析，获得附近的人流量、入店量、驻留时长等信息  
 > 本系统以Spark + Hadoop为核心，搭建了基于WIFI探针的大数据分析系统
 
+- 项目演示
+[演示视频](http://v.youku.com/v_show/id_XMjg1OTYxNzg1Ng==.html?spm=a2hzp.8244740.0.0)
+
 ## Module Introduction
 
 ### Computing-Core
