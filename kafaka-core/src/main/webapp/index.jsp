@@ -1,21 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: maicius
-  Date: 2017/3/31
-  Time: 下午6:35
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Spring4 MVC -HelloWorld</title>
 </head>
 <body>
-<form action="/userRegist.action" method="GET">
-    <input type="text" name="userName" placeholder="用户名"/>
-    <input type="password" name="password" placeholder="密码" />
-    <input type="text" name="nickName" placeholder="昵称"/>
-    <input type="submit" about="登陆"/>
-</form>
+<h1>Welcome</h1>
+<h2><a href="/receive.action">Get a Message</a></h2>
+
 </body>
 </html>

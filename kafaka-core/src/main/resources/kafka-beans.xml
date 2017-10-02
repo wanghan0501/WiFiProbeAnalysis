@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+
+    <context:component-scan base-package="com.cs.scu.kafka.producer"></context:component-scan>
+    <context:component-scan base-package="com.cs.scu.kafka.consumer"></context:component-scan>
+
+
+    <!--这是给 数据分析 用的!-->
+    <bean id="kafkaProducers" class="com.cs.scu.kafka.producer.KafkaProducers">
+        <constructor-arg>
+            <props>
+
+                <prop key="topic">test-remote</prop>
+                <!--<prop key="topic">test</prop>-->
+                <!--<prop key="bootstrap.servers">localhost:9092</prop>-->
+                <prop key="bootstrap.servers">120.24.238.195:9092,120.25.162.32:9092,112.74.114.226:9092,112.74.124.150:9092</prop>
+                <prop key="acks">all</prop>
+                <prop key="key.serializer">org.apache.kafka.common.serialization.StringSerializer</prop>
+                <prop key="value.serializer">org.apache.kafka.common.serialization.StringSerializer</prop>
+                <prop key="buffer.memory">33554432</prop>
+            </props>
+        </constructor-arg>
+    </bean>
+
+    <bean id="kafkaConsumers" class="com.cs.scu.kafka.consumer.KafkaConsumers">
+        <constructor-arg>
+            <props>
+                <prop key="topic">test-remote</prop>
+                <!--<prop key="topic">test</prop>-->
+                <!--<prop key="bootstrap.servers">localhost:9092</prop>-->
+                <prop key="bootstrap.servers">120.24.238.195:9092,120.25.162.32:9092,112.74.114.226:9092,112.74.124.150:9092</prop>
+                <prop key="group.id">group1</prop>
+                <prop key="enable.auto.commit">true</prop>
+                <prop key="auto.commit.interval.ms">1000</prop>
+                <prop key="session.timeout.ms">30000</prop>
+                <prop key="key.deserializer">org.apache.kafka.common.serialization.StringDeserializer
+                </prop>
+                <prop key="value.deserializer">org.apache.kafka.common.serialization.StringDeserializer
+                </prop>
+            </props>
+        </constructor-arg>
+    </bean>
+
+    <!--这是hive用的!-->
+    <bean id="kafkaProducerForHive" class="com.cs.scu.kafka.producer.KafkaProducerForHive">
+        <constructor-arg>
+            <props>
+                <prop key="topic">hive-data</prop>
+                <prop key="bootstrap.servers">120.24.238.195:9092,120.25.162.32:9092,112.74.114.226:9092,112.74.124.150:9092</prop>
+                <prop key="acks">all</prop>
+                <prop key="key.serializer">org.apache.kafka.common.serialization.StringSerializer</prop>
+                <prop key="value.serializer">org.apache.kafka.common.serialization.StringSerializer</prop>
+                <prop key="buffer.memory">33554432</prop>
+            </props>
+        </constructor-arg>
+    </bean>
+
+    <bean id="kafkaConsumerForHive" class="com.cs.scu.kafka.consumer.KafkaConsumerForHive">
+        <constructor-arg>
+            <props>
+                <prop key="topic">hive-data</prop>
+                <prop key="bootstrap.servers">120.24.238.195:9092,120.25.162.32:9092,112.74.114.226:9092,112.74.124.150:9092</prop>
+                <prop key="group.id">group1</prop>
+                <prop key="enable.auto.commit">true</prop>
+                <prop key="auto.commit.interval.ms">1000</prop>
+                <prop key="session.timeout.ms">30000</prop>
+                <prop key="key.deserializer">org.apache.kafka.common.serialization.StringDeserializer
+                </prop>
+                <prop key="value.deserializer">org.apache.kafka.common.serialization.StringDeserializer
+                </prop>
+            </props>
+        </constructor-arg>
+    </bean>
+</beans>
