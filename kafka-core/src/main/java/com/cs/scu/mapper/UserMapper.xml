@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cs.scu.mapper.UserMapper">
+    <resultMap id="UserMap" type="User">
+        <result column="userName" property="userName"/>
+        <result column="nickName" property="nickName"/>
+        <result column="identify" property="identify"/>
+    </resultMap>
+    <select id="doUserLogin" parameterType="User" resultMap="UserMap">
+        SELECT * FROM test
+         WHERE  username = #{userName}
+         AND password = #{password}
+    </select>
+
+    <select id="doUserVerify" parameterType="User" resultMap="UserMap">
+        SELECT * FROM test
+        WHERE username= #{userName}
+    </select>
+</mapper>
