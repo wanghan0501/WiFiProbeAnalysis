@@ -73,7 +73,7 @@ HBase Client | 操作HBase
  
  ## About Us
  
- 以下是开放者的GitHub账户，欢迎follow
+ 以下是开发者的GitHub账户，欢迎follow
  
 * [wanghan0501](https://github.com/wanghan0501)
 * [Maicius](https://github.com/Maicius)
