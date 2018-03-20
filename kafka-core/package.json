@@ -1,0 +1,23 @@
+{
+  "name": "webdesign",
+  "version": "1.0.0",
+  "description": "web design",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wanghan0501/WIFIProbeAnalysis_WebDesign.git"
+  },
+  "author": "maicius",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wanghan0501/WIFIProbeAnalysis_WebDesign/issues"
+  },
+  "homepage": "https://github.com/wanghan0501/WIFIProbeAnalysis_WebDesign#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "echart": "file:node_modules/echart"
+  }
+}
