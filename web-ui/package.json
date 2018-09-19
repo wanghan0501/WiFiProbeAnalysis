@@ -37,6 +37,7 @@
     "bootstrap": "^3.3.7",
     "echarts": "^3.6.1",
     "echarts-liquidfill": "~1.0.5",
+    "fsevents": "^1.2.4",
     "opn": "^4.0.2",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",

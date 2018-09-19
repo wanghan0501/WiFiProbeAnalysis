@@ -20,7 +20,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 // 代理服务器
 app.use('/shopro', proxyMiddleware({
-    target: 'http://admin.sosout.co',
+    target: 'http://localhost',
     changeOrigin: true
 }));
 
