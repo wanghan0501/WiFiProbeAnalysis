@@ -7,6 +7,10 @@
 
 ## Module Introduction
 
+### 系统配置说明
+
+[WifiProbeAnalysis 系统安装配置说明](./WifiProbeAnalysis 系统安装配置说明.md)
+
 ### Computing-Core
 - 系统核心， 负责实时计算以及离线计算
 - 主要技术或API：
