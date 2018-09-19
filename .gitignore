@@ -44,4 +44,4 @@
 **/app/vendor
 **/package-lock.json
 **/tags
-
+!*.pdf
