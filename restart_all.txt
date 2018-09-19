@@ -1,0 +1,27 @@
+# 启动hadoop集群
+/usr/local/Cellar/hadoop/2.8.0/sbin/start-dfs.sh
+/usr/local/Cellar/hadoop/2.8.0/sbin/start-yarn.sh
+
+# 关闭hadoop集群
+/usr/local/Cellar/hadoop/2.8.0/sbin/stop-dfs.sh
+/usr/local/Cellar/hadoop/2.8.0/sbin/stop-yarn.sh
+
+# 启动Spark
+/usr/local/Cellar/spark-2.2.0/sbin/start-all.sh
+
+# 启动zookeeper
+cd /usr/local/Cellar/zookeeper/3.4.10/bin/
+zkServer start
+
+# 关于zookeeper
+zkServer stop
+# 启动zookeeper客户端并清理hbase数据
+zkcli
+rmr /hbase
+
+
+# 启动hbase
+/usr/local/Cellar/hbase/1.2.6/bin/start-hbase.sh
+
+# 关于hbase
+/usr/local/Cellar/hbase/1.2.6/bin/stop-hbase.sh
