@@ -11,13 +11,13 @@ import java.util.Properties;
 public class PropertiesUtil {
 	
 	public static boolean setProperty(String key, String value) {
-		ClassPathResource resource = new ClassPathResource("dsr.properties");
+		ClassPathResource resource = new ClassPathResource("hbase.properties");
 		Properties pros = new Properties();
 		try {
 			pros.load(resource.getInputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
-			String errorMessage = "dsr.properties文件不存在！";
+			String errorMessage = "hbase.properties文件不存在！";
 			System.out.println(errorMessage);
 			return false;
 		}
@@ -34,13 +34,13 @@ public class PropertiesUtil {
 	 * @return
 	 */
 	public static String getProperty(String propertyName){
-		ClassPathResource resource = new ClassPathResource("dsr.properties");
+		ClassPathResource resource = new ClassPathResource("hbase.properties");
 		Properties pros = new Properties();
 		try {
 			pros.load(resource.getInputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
-			String errorMessage = "dsr.properties文件不存在！";
+			String errorMessage = "hbase.properties文件不存在！";
 			System.out.println(errorMessage);
 		}
 		String propertyValue = pros.getProperty(propertyName);

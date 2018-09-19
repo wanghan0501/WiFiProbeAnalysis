@@ -2,6 +2,8 @@
 
 本说明指在本地环境（MacOS）上进行安装测试，以方便进行二次开发。由于本项目实际开发周期比较短，存在较多bug，且我们几人都没有继续开发的兴趣，所以仅供学习交流之用。
 
+2018年9月19日更新
+
 [restart_all]()脚本中有常用的一些指令，可以参考
 
 ### 计算中心Computing-core项目配置：
@@ -85,3 +87,29 @@
 	> ./start-hbase.sh
 
 * 4.如果遇见任何关于Scala兼容性的问题，请确保使用的Scala版本与本文中一致，即2.11.11
+
+### 前端web-ui配置
+
+[web-ui配置说明](./web-ui/README.md)
+
+这个比较简单，如果不能正常运行，通常是前端依赖包版本不同导致的，请注意npm install时候的各种警告  
+2018年9月19日，配置运行成功
+
+
+### 网站后端web-server 配置
+
+[web-server项目配置](./web-server/README.md)  
+这是一个普通的Java-web项目，依赖都写在maven里，按自己需求修改db.properties后基本上就能跑起来  
+用户数据是保存在redis中的，所以不需要进行什么建表操作(其实我觉得这里应该使用mysql来保存永久性数据，但是项目开发时为了应用新知识，就全部改为了redis)
+
+[redis说明.md](./web-server/redis说明.md)
+这是redis中使用的数据结构说明文档，但只需要保证redis正常启动就行
+
+需要注意的是，由于本项目并没有在前端提供注册的方式，因为这个可以通过管理员来添加。所以可以通过下面这个链接直接访问后端的注册接口进行注册：
+
+> http://localhost:8080/userRegist.action?userName={username}&password={password}&nickName={nickname}
+
+
+### kafka-core项目配置
+
+2018年9月19日留，这个项目我没能配置成功，因为

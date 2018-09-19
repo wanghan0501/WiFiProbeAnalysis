@@ -30,7 +30,6 @@
 **/dependency-reduced-pom.xml 
 
 # property files
-**/*.properties
 
 # spark meta data
 **/spark-warehouse/
