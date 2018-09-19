@@ -9,7 +9,8 @@
 
 ### 系统配置说明
 
-[WifiProbeAnalysis 系统安装配置说明](./WifiProbeAnalysis 系统安装配置说明.md)
+2018年9月19日更新  
+[WifiProbeAnalysis 系统安装配置说明](https://github.com/wanghan0501/WiFiProbeAnalysis/blob/master/WifiProbeAnalysis%20%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E.md)
 
 ### Computing-Core
 - 系统核心， 负责实时计算以及离线计算
