@@ -93,7 +93,13 @@
 [web-ui配置说明](./web-ui/README.md)
 
 这个比较简单，如果不能正常运行，通常是前端依赖包版本不同导致的，请注意npm install时候的各种警告  
+
+需要注意的是，这里并没有解决跨域的问题，所以开发的时候我都关掉了chrome浏览器的禁止跨域，在命令行中输入如下脚本:
+
+> open -a "Google Chrome" --args --disable-web-security  --user-data-dir
+
 2018年9月19日，配置运行成功
+
 
 
 ### 网站后端web-server 配置
