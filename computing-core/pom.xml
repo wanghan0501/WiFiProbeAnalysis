@@ -11,10 +11,10 @@
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
         <encoding>UTF-8</encoding>
-        <scala.version>2.11.11</scala.version>
+        <scala.version>2.11.8</scala.version>
         <scala.tools.version>2.11</scala.tools.version>
         <spark.version>2.2.0</spark.version>
-        <hbase.version>1.3.0</hbase.version>
+        <hbase.version>1.4.9</hbase.version>
         <hadoop.version>2.7.4</hadoop.version>
         <kafka.version>0.10.1.1</kafka.version>
         <jedis.version>2.9.0</jedis.version>

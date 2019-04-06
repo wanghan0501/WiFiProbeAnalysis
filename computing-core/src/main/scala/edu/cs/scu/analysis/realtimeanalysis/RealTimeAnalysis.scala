@@ -12,15 +12,7 @@ import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streaming.dstream.DStream
 
-/**
-  * 实时数据分析
-  *
-  * Created by Wang Han on 2017/6/20 19:57.
-  * E-mail address is wanghan0501@vip.qq.com.
-  * Copyright © 2017 Wang Han. SCU. All Rights Reserved.
-  *
-  * @author Wang Han
-  */
+
 object RealTimeAnalysis {
   def analysis(sparkSession: SparkSession, streamingContext: StreamingContext, data: DStream[String]): Unit = {
 
@@ -32,9 +24,9 @@ object RealTimeAnalysis {
     //    val flowData = DataUtil.getFlowDStream(preData)
     //    val totalFlowData = DataUtil.getTotalFlow(flowData)
     //    val checkInFlowData = DataUtil.getCheckInFlow(flowData)
-
+    println(data)
     data.foreachRDD(foreachFunc = rdd => {
-
+      println("count", rdd.count())
       // 如果当前窗口记录不为空
       if (rdd.count() >= 1) {
         // 读取格式化json
@@ -44,6 +36,8 @@ object RealTimeAnalysis {
         //        df.printSchema()
         df.foreach(t => {
           // 地址信息
+          println(t)
+          print("begin to get")
           val addr = t.getString(t.fieldIndex(AnalysisConstants.FIELD_ARRD))
           val datas = t.getSeq(t.fieldIndex(AnalysisConstants.FIELD_DATA)).asInstanceOf[Seq[Row]]
           // 嗅探器设备id

@@ -29,7 +29,12 @@ object AnalysisUtil {
     * @return
     */
   def isCheckIn(range: Double, rssi: Int): Boolean = {
-    if (range < property.getVisitRange)
+
+//    if (range < property.getVisitRange)
+//      true
+//    else
+//      false
+    if(range < 10)
       true
     else
       false

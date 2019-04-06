@@ -7,5 +7,5 @@ package edu.cs.scu;
  *
  * @author Wang Han
  */
-public class TestMybatis {
+public class  TestMybatis {
 }

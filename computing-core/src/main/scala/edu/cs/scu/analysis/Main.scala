@@ -40,12 +40,13 @@ object Main {
       RealTimeAnalysis.analysis(spark, streamingContext, kafkaData)
     }
 
-    //    // 获取原始数据
-    //    val originData = InitUtil.getDStream(streamingContext)
-    //    // 如果读入的数据不为空
-    //    if (originData != null) {
-    //      RealTimeAnalysis.analysis(spark, streamingContext, originData)
-    //    }
+//    // 获取原始数据
+//    val originData = InitUtil.getDStream(streamingContext)
+//    // 如果读入的数据不为空
+//    if (originData != null) {
+//      println("获取数据")
+//      RealTimeAnalysis.analysis(spark, streamingContext, originData)
+//    }
     // 启动流环境
     streamingContext.start()
     streamingContext.awaitTermination()

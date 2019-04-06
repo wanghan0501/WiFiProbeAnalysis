@@ -16,12 +16,6 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 /**
   * 初始化spark环境工具
-  *
-  * Created by Wang Han on 2017/3/29 14:43.
-  * E-mail address is wanghan0501@vip.qq.com.
-  * Copyright © Wang Han SCU. All Rights Reserved.
-  *
-  * @author Wang Han
   */
 
 object InitUtil {

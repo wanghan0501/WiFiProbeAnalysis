@@ -35,15 +35,16 @@ public class MacAdressUtil {
      * @return
      */
     public static String getBrandByMac(String macAddress) {
-        String vendor = getVendorByMac(macAddress);
-        String brand = "Unknown";
-        try {
-            brand = vendor.split(" ")[0].trim();
-        } catch (Exception e) {
-            if (null != vendor)
-                brand = vendor;
-        }
-        return brand;
+//        String vendor = getVendorByMac(macAddress);
+//        String brand = "Unknown";
+//        try {
+//            brand = vendor.split(" ")[0].trim();
+//        } catch (Exception e) {
+//            if (null != vendor)
+//                brand = vendor;
+//        }
+//        return brand;
+        return "Unknown";
     }
 
 

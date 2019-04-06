@@ -88,8 +88,9 @@ public class PropertyBean implements Serializable {
         this.activityDegree = activityDegree;
     }
 
+    //记得改
     public String getVisitTimeSplit() {
-        return visitTimeSplit;
+        return "10000";
     }
 
     public void setVisitTimeSplit(String visitTimeSplit) {
