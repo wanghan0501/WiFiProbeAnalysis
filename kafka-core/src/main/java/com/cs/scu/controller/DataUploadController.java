@@ -8,6 +8,7 @@ import com.cs.scu.kafka.consumer.KafkaConsumers;
 import com.cs.scu.kafka.producer.KafkaProducerForHive;
 import com.cs.scu.kafka.producer.KafkaProducers;
 import com.cs.scu.service.DataUploadService;
+import com.cs.scu.service.HDFSService;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,13 +26,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by lch on 2017/5/3.
- */
 @Controller
 public class DataUploadController {
     @Autowired
     private DataUploadService dataUploadService;
+
+    @Autowired
+    private HDFSService hdfsService;
 
     @Resource(name = "kafkaProducers")
     KafkaProducers producers;
@@ -60,7 +61,7 @@ public class DataUploadController {
         DataGroup group;
         String ujson = "";
         String res = "";
-
+        hdfsService.InitHDFSWriter("hdfs://localhost:9000/");
         try {
             ujson = new String(json.getBytes("ISO-8859-1"), "utf-8");
             res = URLDecoder.decode(ujson, "UTF-8");
@@ -72,7 +73,7 @@ public class DataUploadController {
                 if (group.getAddr() == null) {
                     group.setLat("30.55836");
                     group.setLon("104.00285");
-                    group.setAddr("四川省成都市双流区川大路2段四川大学江安校区计算机学院");
+                    group.setAddr("南京大学鼓楼校区费彝民楼");
                 }
 
                 //System.err.println("resdata ---> " + JSON.toJSONString(group));
@@ -95,14 +96,15 @@ public class DataUploadController {
                         data1.setTmc("");
                     }
                 }
-                dataUploadService.saveObject(group);
+                //dataUploadService.saveObject(group);
                 String resJson = JSON.toJSONString(group);
 
                 System.err.println("resJson ---> " + StringEscapeUtils.escapeJava(resJson));
 
-                producers.sendMessage(resJson);//发送数据到kafka topic : test,进行数据分析
+                //producers.sendMessage(resJson);//发送数据到kafka topic : test,进行数据分析
                 //producerForHive.sendMessage(resJson);//发送数据到topic : hiveData,存放到hive中
-
+                // 将数据保存到hdfs中
+                hdfsService.write(resJson);
             }catch (Exception e){
             }
 
