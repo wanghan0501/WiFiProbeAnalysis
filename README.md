@@ -3,6 +3,8 @@
 > WIFI探针是一种可以记录附近mac地址的嗅探器，可以根据收集到的mac地址进行数据分析，获得附近的人流量、入店量、驻留时长等信息  
 > 本系统以Spark + Hadoop为核心，搭建了基于WIFI探针的大数据分析系统
 
+![](./image/main.jpg)
+
 - 项目演示
 [演示视频](http://v.youku.com/v_show/id_XMjg1OTYxNzg1Ng==.html?spm=a2hzp.8244740.0.0)
 
@@ -10,10 +12,10 @@
 
 ### 系统配置说明
 
-2018年9月19日更新  
+2019年10月3日更新  
 [WifiProbeAnalysis 系统安装配置说明](https://github.com/wanghan0501/WiFiProbeAnalysis/blob/master/WifiProbeAnalysis%20%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E.md)
 
-### Computing-Core
+### [Computing-Core](https://github.com/wanghan0501/WiFiProbeAnalysis/tree/master/computing-core)
 - 系统核心， 负责实时计算以及离线计算
 - 主要技术或API：
 
@@ -29,18 +31,19 @@ FastJson | Json解析工具
 HBase Client | 操作HBase
  
 
-### Kafka-Core
-- 利用Kafka缓存数据， 供实时分析程序提取
+### [Kafka-Core](https://github.com/wanghan0501/WiFiProbeAnalysis/tree/master/kafka-core)
+- 利用Kafka或HDFS缓存数据， 供实时分析程序提取
 - 将原始数据存储进HBase，供离线分析程序使  
 
 > 主要技术或API： 
->
+
  名称  |  解释  |
  ------|--------|
  Kafka |基于内存的消息队列，负责缓冲数据，供实时分析程序提取
- HBase Client | 操作HBase
+ HDFS | Hadoop分布式文件系统，具有高容错性、高吞吐性等特点
+ HBase | 建立的hdfs之上，提供高可靠性、高性能、列存储、可伸缩、实时读写的数据库系统
 
-### Web-UI
+### [Web-UI](https://github.com/wanghan0501/WiFiProbeAnalysis/tree/master/web-ui)
 - 数据解析和展示
 > 主要技术或API：
 
@@ -48,11 +51,11 @@ HBase Client | 操作HBase
   -----|-----|
   React| 前端框架
   Redux| 负责管理与后端的数据交互
-  webSocket | 实时数据获取
+  webSocket | 实时数据获取，避免了前端轮询，节省大量网络资源
   echarts | 绘图
   Ant Design | UI框架
 
-### Web-Server
+### [Web-Server](https://github.com/wanghan0501/WiFiProbeAnalysis/tree/master/web-server)
 - 网站服务器端，负责处理前端请求
 > 主要技术或API：
 
@@ -60,10 +63,13 @@ HBase Client | 操作HBase
  -----|-----|
  SSM 架构| Spring MVC + Spring + Mybatis框架
  Spring-Data-Redis | 封装对redis的操作
- FastJson| 处理Json数据
- Alidayu | 阿里大鱼，发送短信
+ webSocket | 实时向前端推送数据，可以做到广播，即一次查询，向N个前端推送，节省大量资源
+ Alidayu | 阿里大鱼，发送短信(开源版本中已删除)
  POI | 导出Excel报表
  
+### [py-script](https://github.com/wanghan0501/WiFiProbeAnalysis/tree/master/py-script)
+ 
+模拟发送探针数据的python脚本，使用多线程来模拟大量探针的发包
  
 ### Databases in System
 
