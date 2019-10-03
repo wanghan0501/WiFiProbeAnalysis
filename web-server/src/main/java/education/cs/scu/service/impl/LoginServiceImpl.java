@@ -1,15 +1,9 @@
 package education.cs.scu.service.impl;
 
-import com.taobao.api.DefaultTaobaoClient;
-import com.taobao.api.TaobaoClient;
-import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
-import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
-import education.cs.scu.entity.AlidayuSMS;
 import education.cs.scu.entity.User;
 import education.cs.scu.javautils.VerifyCodeUtil;
 import education.cs.scu.mapper.UserMapper;
 import education.cs.scu.service.LoginService;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,32 +25,32 @@ public class LoginServiceImpl implements LoginService {
     public String verifyCode(User user) throws Exception {
         String url = "http://gw.api.taobao.com/router/rest";
         int code = VerifyCodeUtil.createVerifyCode();
-        TaobaoClient client = new DefaultTaobaoClient(url,
-                "23780335",
-                "e158afdc661f0d72cf0855b05900f774");
-        AlidayuSMS alidayuSMS = new AlidayuSMS();
-        alidayuSMS.setCode(String.valueOf(code));
-        alidayuSMS.setName(user.getUserName());
-        ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(alidayuSMS);
-
-        AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
-
-        //必须填写normal
-        req.setSmsType("normal");
-        //应用名称
-        req.setSmsFreeSignName("WIFI探针管理平台");
-        //电话号码
-        req.setRecNum(user.getUserName());
-        //模板
-        req.setSmsTemplateCode("SMS_74350014");
-        req.setExtend(user.getUserName());
-        req.setSmsParamString(json);
+//        TaobaoClient client = new DefaultTaobaoClient(url,
+//                "23780335",
+//                "e158afdc661f0d72cf0855b05900f774");
+//        AlidayuSMS alidayuSMS = new AlidayuSMS();
+//        alidayuSMS.setCode(String.valueOf(code));
+//        alidayuSMS.setName(user.getUserName());
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        String json = objectMapper.writeValueAsString(alidayuSMS);
+//
+//        AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+//
+//        //必须填写normal
+//        req.setSmsType("normal");
+//        //应用名称
+//        req.setSmsFreeSignName("WIFI探针管理平台");
+//        //电话号码
+//        req.setRecNum(user.getUserName());
+//        //模板
+//        req.setSmsTemplateCode("SMS_74350014");
+//        req.setExtend(user.getUserName());
+//        req.setSmsParamString(json);
         try {
-            AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);
+//            AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);
             user.setVerifyCode(String.valueOf(code));
             user.setVerifyTime(String.valueOf(new Date()));
-            System.out.println(rsp.getBody());
+            //System.out.println(rsp.getBody());
 //            HttpSession session = request.getSession();
 //            session.setAttribute("verifyCode", String.valueOf(code));
             //int res = userMapper.updateVerifyCode(user);
