@@ -33,20 +33,22 @@ object Main {
       threadPool.shutdown()
     }
 
-    val kafkaData = InitUtil.getDStreamFromKafka(streamingContext).map(_._2)
-    // 如果读入的数据不为空
-    if (kafkaData != null) {
-      kafkaData.print()
-      RealTimeAnalysis.analysis(spark, streamingContext, kafkaData)
-    }
-
-//    // 获取原始数据
-//    val originData = InitUtil.getDStream(streamingContext)
+    // 从kafka中读取流数据
+//    val kafkaData = InitUtil.getDStreamFromKafka(streamingContext).map(_._2)
+//
 //    // 如果读入的数据不为空
-//    if (originData != null) {
-//      println("获取数据")
-//      RealTimeAnalysis.analysis(spark, streamingContext, originData)
+//    if (kafkaData != null) {
+//      println("get data from kafka")
+//      RealTimeAnalysis.analysis(spark, streamingContext, kafkaData)
 //    }
+
+    // 从hdfs中读取流数据
+    val originData = InitUtil.getDStream(streamingContext)
+    // 如果读入的数据不为空
+    if (originData != null) {
+      println("get data from hdfs")
+      RealTimeAnalysis.analysis(spark, streamingContext, originData)
+    }
     // 启动流环境
     streamingContext.start()
     streamingContext.awaitTermination()
