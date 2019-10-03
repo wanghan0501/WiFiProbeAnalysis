@@ -13,19 +13,14 @@ def random_mac():
     randMac = ":".join(macList)
     return randMac
 
-
 def random_rssi():
     return str(random.randrange(-100, 0))
-
 
 def random_range():
     return str(round(random.uniform(0, 100), 1))
 
-
-
 def random_id():
     return str(random.randrange(1, 1000))
-
 
 probeList = []
 
@@ -33,18 +28,14 @@ probeList = []
 def send_random_json():
     headers = {'Content-Type': 'application/json'}
     probe = {"id": ''+random_id(), "mmac": random_mac(), "rate": "3", "wssid": "test", "wmac": random_mac(), "time": time.strftime('%a %b %e %H:%M:%S %Y', time.localtime(time.time()))}
-    mac_data ={"mac": random_mac(), "rssi": random_rssi(), "range": random_range()}
     mac_DataMul = []
-    #data_json = json.dumps(mac_data)
     for i in range(random.randrange(1, 5)):
         mac_DataMul.append({"mac": random_mac(), "rssi": random_rssi(), "range": random_range()})
     probe['data'] = mac_DataMul
-
     probe = json.dumps(probe)
     print(probe)
-    request = requests.post(url='http://localhost:8080/upload.action', headers=headers, data=probe)
-    response = request.content.decode("utf-8")
-    print("response:", response)
+    request = requests.post(url='http://localhost:8000/upload.action', headers=headers, data=probe)
+    print("response code:", request.status_code)
 
 # 模拟多线程发包
 def send_rand_json_with_multi_thread():
