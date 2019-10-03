@@ -32,7 +32,7 @@
 
 - 6.在IDEA中启动 scala.edu.cs.scu.analysis.Main，没有任何错误则正常启动,如有错误请参考下一节。正常启动后的computing-core如下图：
 
-
+![](./image/computing-core.png)
 
 ### Computing-core项目配置常见错误
 
@@ -103,17 +103,24 @@
 
 > npm run hot
 
+默认端口号：8888
+
 这个比较简单，如果不能正常运行，通常是前端依赖包版本不同导致的，请注意npm install时候的各种警告  
 
 需要注意的是，这里并没有解决跨域的问题，所以开发的时候我都关掉了chrome浏览器的禁止跨域，在命令行中输入如下脚本:
 
 > open -a "Google Chrome" --args --disable-web-security  --user-data-dir
 
-若程序在启动后却不能互相访问，则很有可能是此处问题。
+若程序在启动后却不能互相访问，则很有可能是此处问题。后续会修改这一部分。
+
+正常运行中该界面如下：
+![](./image/web.png)
 
 ### 网站后端web-server 配置
 
 [web-server项目配置](./web-server/README.md)  
+
+默认端口号：8080
 这是一个普通的Java-web项目，依赖都写在maven里。
 
 用户数据保存在redis中，但是很不幸，还有部分数据保存在mysql中，由于mysql当时未备份，所以已经丢失了。但是不影响用户登陆和查看实时分析系统。
@@ -127,6 +134,8 @@
 
 > http://localhost:8080/userRegist.action?userName={username}&password={password}&nickName={nickname}
 
+正常运行的webServer如下：
+![](./image/web-server.png)
 
 ### kafka-core项目配置
 
@@ -136,10 +145,22 @@
 
 ### 模拟发包脚本
 请根据需要修改  
-[模拟发包脚本](./py-script/URLTest.py)
+[模拟发包脚本](./py-script/SimulatedSendPackets.py)
+
+正常运行中的脚本控制台如下：
+
+![](./image/simulate.png)
 
 ### 其它常见错误
 
-java.rmi.server.ExportException: Port already in use: 1098
+- java.rmi.server.ExportException: Port already in use: 1098
 
 Java虚拟机端口号冲突，由于系统启动时要开启两个java web应用，所以需要修改其中一个Java 虚拟机的端口号
+![](./image/jmx.png)
+
+- 模拟发包的返回结果的状态码为404
+
+禁掉浏览器的不允许跨域：
+在命令行中输入如下脚本:
+
+> open -a "Google Chrome" --args --disable-web-security  --user-data-dir
