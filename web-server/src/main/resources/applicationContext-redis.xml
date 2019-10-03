@@ -51,8 +51,9 @@
         <property name="poolConfig" ref="jedisPoolConfig"/>
         <property name="port" value="${redis.port}"/>
         <property name="hostName" value="${redis.host}"/>
-        <property name="password" value="${redis.password}"/>
-        <property name="timeout" value="${redis.timeout}"></property>
+<!--        <property name="password" value="${redis.password}"/>-->
+        <property name="timeout" value="${redis.timeout}"></property>d .
+
     </bean>
 
 
