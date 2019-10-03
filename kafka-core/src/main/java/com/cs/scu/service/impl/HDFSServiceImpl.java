@@ -39,18 +39,16 @@ public class HDFSServiceImpl implements HDFSService{
             System.out.println("hdfs init fail!"+e);
         }
     }
-
     public void write(String msg) {
         long now = System.currentTimeMillis();
         try {
-            String filename = ip+"/source/"+now+".txt";
+            String filename = this.ip+"/source/"+now+".txt";
             Path dst = new Path(filename);
-            FSDataOutputStream os = fs.create(dst);
+            FSDataOutputStream os = this.fs.create(dst);
             os.write(msg.getBytes(), 0, msg.getBytes().length);
             os.flush();
             os.close();
             System.out.println("写入hdfs成功:" + msg);
-
         } catch (Exception e) {
             System.out.println("write hdfs file failure:"+e);
         }
