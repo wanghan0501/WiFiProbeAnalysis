@@ -123,3 +123,5 @@
 ### 模拟发包脚本
 请根据需要修改  
 [模拟发包脚本](./py-script/URLTest.py)
+
+java.rmi.server.ExportException: Port already in use: 1098;
