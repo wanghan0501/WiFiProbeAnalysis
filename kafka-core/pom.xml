@@ -61,7 +61,7 @@
         <org.springframework.security-version>4.0.1.RELEASE</org.springframework.security-version>
         <org.aspectj-version>1.8.1</org.aspectj-version>
         <mybatis.version>3.2.1</mybatis.version>
-        <spring.version>4.3.7.RELEASE</spring.version>
+        <spring.version>5.2.2.RELEASE</spring.version>
         <mybatis.spring.version>1.3.1</mybatis.spring.version>
         <hadoop.version>2.8.0</hadoop.version>
     </properties>
