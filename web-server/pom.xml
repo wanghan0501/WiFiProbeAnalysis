@@ -322,7 +322,7 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>3.9</version>
+            <version>3.17</version>
         </dependency>
 
 <!--        &lt;!&ndash; 阿里云 短信 依赖 &ndash;&gt;-->
