@@ -21,7 +21,7 @@
         <junit.version>4.12</junit.version>
         <mybatis.version>3.2.1</mybatis.version>
         <mysql.connector.java.version>5.1.41</mysql.connector.java.version>
-        <fastjson.version>1.2.30</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
     </properties>
 
     <dependencies>
